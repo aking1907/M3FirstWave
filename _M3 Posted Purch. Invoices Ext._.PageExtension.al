@@ -8,17 +8,13 @@ pageextension 50103 "M3 Posted Purch. Invoices Ext." extends "Posted Purchase In
             {
                 ApplicationArea = All;
             }
-            field("Proforma Invoice Date"; "Proforma Invoice Date")
-            {
-                ApplicationArea = All;
-            }
         }
     }
     actions
     {
         addlast(processing)
         {
-            action("Set proforma Invoice No.")
+            action("Set Proforma Invoice No.")
             {
                 ApplicationArea = Basic, Suite;
                 Caption = 'Set proforma Invoice No.';
@@ -35,6 +31,26 @@ pageextension 50103 "M3 Posted Purch. Invoices Ext." extends "Posted Purchase In
                 begin
                     CurrPage.SetSelectionFilter(PIH);
                     PI.CreateNewProformaInvoice(PIH);
+                    CurrPage.Update(false);
+                end;
+            }
+            action("Remove Proforma Invoice No.")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Remove proforma Invoice No.';
+                Image = Edit;
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                PromotedOnly = true;
+
+                trigger OnAction()
+                var
+                    PIH: Record "Purch. Inv. Header";
+                    PI: Record "M3 Proforma Invoice Header";
+                begin
+                    CurrPage.SetSelectionFilter(PIH);
+                    PI.RemoveFromProformaInvoice(PIH);
                     CurrPage.Update(false);
                 end;
             }

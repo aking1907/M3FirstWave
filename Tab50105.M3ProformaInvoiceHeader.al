@@ -146,6 +146,7 @@ table 50105 "M3 Proforma Invoice Header"
 
     var
         LblChangeConfirmation: Label 'Do you want to change %1?';
+        NoSerMgt: Codeunit NoSeriesManagement;
 
     procedure CopyFromPurchInvoice(var PurchInvoice: Record "Purch. Inv. Header")
     var
@@ -173,17 +174,39 @@ table 50105 "M3 Proforma Invoice Header"
 
     procedure CreateNewProformaInvoice(var PurchInvHeader: Record "Purch. Inv. Header")
     var
+        ProfInv: Record "M3 Proforma Invoice Header";
+        PIH: Record "Purch. Inv. Header";
+    begin
+        if not PurchInvHeader.FindSet() then exit;
+
+        PIH.Copy(PurchInvHeader);
+        PIH.SetFilter("Proforma Invoice No.", '<>%1', '');
+        if PIH.FindFirst() then begin
+            if PurchInvHeader.FindSet() then
+                repeat
+                    PurchInvHeader.TestField("Buy-from Vendor No.", PIH."Buy-from Vendor No.");
+                    PurchInvHeader.TestField("Shipment Method Code", PIH."Shipment Method Code");
+                    if PurchInvHeader."Proforma Invoice No." <> '' then
+                        PurchInvHeader.TestField("Proforma Invoice No.", PIH."Proforma Invoice No.");
+                until PurchInvHeader.Next() = 0;
+
+            PurchInvHeader.ModifyAll("Proforma Invoice No.", PIH."No.");
+            exit;
+        end;
+
+        ProfInv."No." := NoSerMgt.GetNextNo('PURCHPI', WorkDate(), true);
+        ProfInv."Document Date" := WorkDate();
+        ProfInv.Insert(true);
+
+        PurchInvHeader.ModifyAll("Proforma Invoice No.", ProfInv."No.");
+    end;
+
+    procedure RemoveFromProformaInvoice(var PurchInvHeader: Record "Purch. Inv. Header")
+    var
         PI: Record "M3 Proforma Invoice Header";
     begin
-        //special check availability to create proforma invoice will be there
+        if not PurchInvHeader.FindSet() then exit;
 
-        if PurchInvHeader.FindSet() then begin
-            PI."No." := 'PI00000001';
-            PI."Document Date" := WorkDate();
-            PI.Insert(true);
-
-            PurchInvHeader.ModifyAll("Proforma Invoice No.", PI."No.");
-            PurchInvHeader.ModifyAll("Proforma Invoice Date", PI."Document Date");
-        end;
+        PurchInvHeader.ModifyAll("Proforma Invoice No.", '');
     end;
 }
