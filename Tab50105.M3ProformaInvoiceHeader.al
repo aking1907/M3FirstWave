@@ -2,7 +2,7 @@ table 50105 "M3 Proforma Invoice Header"
 {
     Caption = 'M3 Proforma Invoice Header';
     DataClassification = ToBeClassified;
-
+    Permissions = tabledata 122 = rimd;
     fields
     {
         field(10; "No."; Code[10])
@@ -169,5 +169,21 @@ table 50105 "M3 Proforma Invoice Header"
             if ArrayLines[i] <> '' then FullAddress += ', ' + ArrayLines[i];
         end;
         exit(DelChr(FullAddress, '<>', ','));
+    end;
+
+    procedure CreateNewProformaInvoice(var PurchInvHeader: Record "Purch. Inv. Header")
+    var
+        PI: Record "M3 Proforma Invoice Header";
+    begin
+        //special check availability to create proforma invoice will be there
+
+        if PurchInvHeader.FindSet() then begin
+            PI."No." := 'PI00000001';
+            PI."Document Date" := WorkDate();
+            PI.Insert(true);
+
+            PurchInvHeader.ModifyAll("Proforma Invoice No.", PI."No.");
+            PurchInvHeader.ModifyAll("Proforma Invoice Date", PI."Document Date");
+        end;
     end;
 }
