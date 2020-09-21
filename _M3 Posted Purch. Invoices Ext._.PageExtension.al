@@ -30,7 +30,7 @@ pageextension 50103 "M3 Posted Purch. Invoices Ext." extends "Posted Purchase In
                     PI: Record "M3 Proforma Invoice Header";
                 begin
                     CurrPage.SetSelectionFilter(PIH);
-                    PI.CreateNewProformaInvoice(PIH);
+                    PI.UpsertProformaInvoice(PIH);
                     CurrPage.Update(false);
                 end;
             }
@@ -50,7 +50,7 @@ pageextension 50103 "M3 Posted Purch. Invoices Ext." extends "Posted Purchase In
                     PI: Record "M3 Proforma Invoice Header";
                 begin
                     CurrPage.SetSelectionFilter(PIH);
-                    PI.RemoveFromProformaInvoice(PIH);
+                    PI.RemovePIFromProformaInvoice(PIH);
                     CurrPage.Update(false);
                 end;
             }

@@ -3,11 +3,16 @@ table 50105 "M3 Proforma Invoice Header"
     Caption = 'M3 Proforma Invoice Header';
     DataClassification = ToBeClassified;
     Permissions = tabledata 122 = rimd;
+    LookupPageId = "M3 Purch. Proforma Invoice";
+    DrillDownPageId = "M3 Purch. Proforma Invoice";
+    DataCaptionFields = "No.", "Producer No.", "Shipper No.";
+
     fields
     {
         field(10; "No."; Code[10])
         {
             Caption = 'No.';
+            Editable = false;
             DataClassification = ToBeClassified;
         }
         field(20; "Document Date"; Date)
@@ -19,6 +24,7 @@ table 50105 "M3 Proforma Invoice Header"
         {
             Caption = 'Shipper No.';
             DataClassification = ToBeClassified;
+            TableRelation = Vendor;
 
             trigger OnValidate()
             var
@@ -53,6 +59,7 @@ table 50105 "M3 Proforma Invoice Header"
         {
             Caption = 'Producer No.';
             DataClassification = ToBeClassified;
+            TableRelation = Vendor;
 
             trigger OnValidate()
             var
@@ -72,6 +79,18 @@ table 50105 "M3 Proforma Invoice Header"
         {
             Caption = 'Consignee No.';
             DataClassification = ToBeClassified;
+            TableRelation = Customer;
+
+            trigger OnValidate()
+            var
+                Cust: Record Customer;
+            begin
+                "Consignee Desc" := '';
+                if not Cust.Get("Consignee No.") then exit;
+
+                "Consignee Desc" := Cust.Name;
+                "Delivery Basis Desc" := Cust."Delivery Basis Desc";
+            end;
         }
         field(90; "Consignee Desc"; Text[250])
         {
@@ -82,6 +101,16 @@ table 50105 "M3 Proforma Invoice Header"
         {
             Caption = 'Loading Point No.';
             DataClassification = ToBeClassified;
+            TableRelation = Location;
+
+            trigger OnValidate()
+            var
+                Loc: Record Location;
+            begin
+                "Loading Point Desc" := '';
+                if Loc.Get("Loading Point No.") then
+                    "Loading Point Desc" := Loc.Name;
+            end;
         }
         field(110; "Loading Point Desc"; Text[250])
         {
@@ -92,6 +121,16 @@ table 50105 "M3 Proforma Invoice Header"
         {
             Caption = 'Delivery Point No.';
             DataClassification = ToBeClassified;
+            TableRelation = Location;
+
+            trigger OnValidate()
+            var
+                Loc: Record Location;
+            begin
+                "Delivery Point Desc" := '';
+                if Loc.Get("Delivery Point No.") then
+                    "Delivery Point Desc" := Loc.Name;
+            end;
         }
         field(130; "Delivery Point Desc"; Text[150])
         {
@@ -144,6 +183,20 @@ table 50105 "M3 Proforma Invoice Header"
         }
     }
 
+    trigger OnInsert()
+    begin
+        Created := CurrentDateTime;
+        "Created By" := UserId;
+        Updated := CurrentDateTime;
+        "Updated By" := UserId;
+    end;
+
+    trigger OnModify()
+    begin
+        Updated := CurrentDateTime;
+        "Updated By" := UserId;
+    end;
+
     var
         LblChangeConfirmation: Label 'Do you want to change %1?';
         NoSerMgt: Codeunit NoSeriesManagement;
@@ -154,11 +207,12 @@ table 50105 "M3 Proforma Invoice Header"
     begin
         Validate("Shipper No.", PurchInvoice."Buy-from Vendor No.");
         Validate("Producer No.", PurchInvoice."Buy-from Vendor No.");
-        Validate("Consignee No.", PurchInvoice."Pay-to Contact No.");
+        Validate("Consignee No.", PurchInvoice."Sell-to Customer No.");
         Validate("Delivery Basis", PurchInvoice."Shipment Method Code");
 
         if Vendor.Get(PurchInvoice."Buy-from Vendor No.") then
             "Delivery Basis Desc" := 'to fill ...';
+
     end;
 
     local procedure GetAddress(ArrayLines: Array[10] of Text[150]): Text
@@ -172,7 +226,7 @@ table 50105 "M3 Proforma Invoice Header"
         exit(DelChr(FullAddress, '<>', ','));
     end;
 
-    procedure CreateNewProformaInvoice(var PurchInvHeader: Record "Purch. Inv. Header")
+    procedure UpsertProformaInvoice(var PurchInvHeader: Record "Purch. Inv. Header")
     var
         ProfInv: Record "M3 Proforma Invoice Header";
         PIH: Record "Purch. Inv. Header";
@@ -188,9 +242,11 @@ table 50105 "M3 Proforma Invoice Header"
                     PurchInvHeader.TestField("Shipment Method Code", PIH."Shipment Method Code");
                     if PurchInvHeader."Proforma Invoice No." <> '' then
                         PurchInvHeader.TestField("Proforma Invoice No.", PIH."Proforma Invoice No.");
+
                 until PurchInvHeader.Next() = 0;
 
-            PurchInvHeader.ModifyAll("Proforma Invoice No.", PIH."No.");
+            PurchInvHeader.ModifyAll("Proforma Invoice No.", PIH."Proforma Invoice No.");
+            UpdateLotNo(PurchInvHeader);
             exit;
         end;
 
@@ -199,14 +255,53 @@ table 50105 "M3 Proforma Invoice Header"
         ProfInv.Insert(true);
 
         PurchInvHeader.ModifyAll("Proforma Invoice No.", ProfInv."No.");
+        UpdateLotNo(PurchInvHeader);
+
+        PurchInvHeader.FindFirst();
+        ProfInv.CopyFromPurchInvoice(PurchInvHeader);
+        ProfInv.Modify(true);
     end;
 
-    procedure RemoveFromProformaInvoice(var PurchInvHeader: Record "Purch. Inv. Header")
+    procedure RemovePIFromProformaInvoice(var PurchInvHeader: Record "Purch. Inv. Header")
     var
         PI: Record "M3 Proforma Invoice Header";
+        PIH: Record "Purch. Inv. Header";
+        DocumentNo: Code[20];
     begin
-        if not PurchInvHeader.FindSet() then exit;
+        PIH.Copy(PurchInvHeader);
+        PIH.SetFilter("Proforma Invoice No.", '<>%1', '');
+        if not PIH.FindSet() then exit;
+        DocumentNo := PIH."Proforma Invoice No.";
 
-        PurchInvHeader.ModifyAll("Proforma Invoice No.", '');
+        repeat
+            PIH.TestField("Proforma Invoice No.", DocumentNo);
+            PIH."Proforma Invoice No." := '';
+            PIH.Modify();
+        until PIH.Next() = 0;
+
+        PIH.Reset();
+        PIH.SetRange("Proforma Invoice No.", DocumentNo);
+        if not PIH.FindFirst() then
+            if PI.Get(DocumentNo) then
+                PI.Delete();
+
+    end;
+
+    local procedure UpdateLotNo(var PurchInvHeader: Record "Purch. Inv. Header")
+    var
+        ILE: Record "Item Ledger Entry";
+        LOT: Record "Lot No. Information";
+    begin
+        if PurchInvHeader.FindSet() then
+            repeat
+                ILE.SetRange("Document No.", PurchInvHeader."No.");
+                ILE.SetRange("Document Type", ILE."Document Type"::"Purchase Invoice");
+                if ILE.FindSet() then
+                    repeat
+                        LOT.Get(ILE."Item No.", ILE."Variant Code", ILE."Lot No.");
+                        LOT."Certificate Number" := PurchInvHeader."No.";
+                        LOT.Modify();
+                    until ILE.Next() = 0;
+            until PurchInvHeader.Next() = 0;
     end;
 }

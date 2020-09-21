@@ -6,11 +6,7 @@ tableextension 50100 "M3 Purch. Inv. Header Ext." extends "Purch. Inv. Header"
         {
             Caption = 'Proforma Invoice No.';
             DataClassification = ToBeClassified;
-        }
-        field(50001; "Proforma Invoice Date"; Date)
-        {
-            Caption = 'Proforma Invoice Date';
-            DataClassification = ToBeClassified;
+            TableRelation = "M3 Proforma Invoice Header";
         }
     }
 }
