@@ -291,9 +291,11 @@ table 50105 "M3 Proforma Invoice Header"
     var
         ILE: Record "Item Ledger Entry";
         LOT: Record "Lot No. Information";
+
     begin
         if PurchInvHeader.FindSet() then
             repeat
+            
                 ILE.SetRange("Document No.", PurchInvHeader."No.");
                 ILE.SetRange("Document Type", ILE."Document Type"::"Purchase Invoice");
                 if ILE.FindSet() then
