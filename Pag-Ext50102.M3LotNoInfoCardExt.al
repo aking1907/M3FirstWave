@@ -25,6 +25,10 @@ pageextension 50102 "M3 Lot No. Info Card Ext." extends "Lot No. Information Car
                 {
                     ApplicationArea = All;
                 }
+                field(Subtotal; Subtotal)
+                {
+                    ApplicationArea = All;
+                }
                 field("Weight Gross"; "Weight Gross")
                 {
                     ApplicationArea = All;
@@ -42,10 +46,6 @@ pageextension 50102 "M3 Lot No. Info Card Ext." extends "Lot No. Information Car
                     ApplicationArea = All;
                 }
                 field(Origin; Origin)
-                {
-                    ApplicationArea = All;
-                }
-                field(Subtotal; Subtotal)
                 {
                     ApplicationArea = All;
                 }

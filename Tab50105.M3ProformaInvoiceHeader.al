@@ -298,6 +298,7 @@ table 50105 "M3 Proforma Invoice Header"
                 ILE.SetRange("Document Type", ILE."Document Type"::"Purchase Invoice");
                 if ILE.FindSet() then
                     repeat
+                        Message('%1', ILE."Entry No.");
                         LOT.Get(ILE."Item No.", ILE."Variant Code", ILE."Lot No.");
                         LOT."Certificate Number" := PurchInvHeader."No.";
                         LOT.Modify();
