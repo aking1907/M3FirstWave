@@ -316,13 +316,6 @@ table 50105 "M3 Proforma Invoice Header"
                 PurchInvLine.SetRange("Document No.", PurchInvHeader."No.");
                 if PurchInvLine.FindSet() then
                     repeat
-<<<<<<< HEAD:Tab50105.M3ProformaInvoiceHeader.al
-                        Message('%1', ILE."Entry No.");
-                        LOT.Get(ILE."Item No.", ILE."Variant Code", ILE."Lot No.");
-                        LOT."Certificate Number" := PurchInvHeader."No.";
-                        LOT.Modify();
-                    until ILE.Next() = 0;
-=======
                         TmpILE.Reset();
                         TmpILE.DeleteAll();
                         ItemTrackingDocMgt.RetrieveEntriesFromPostedInvoice(TmpILE, PurchInvLine.RowID1());
@@ -344,9 +337,7 @@ table 50105 "M3 Proforma Invoice Header"
                             until TmpILE.Next() = 0;
                         end else
                             Error(ErrAssignProfInvNo, PurchInvLine."Document No.", PurchInvLine."Line No.");
-
                     until PurchInvLine.Next() = 0;
->>>>>>> 0259a408d6c0179d879b9601d9b45b3e1a44db80:Table/Tab50105.M3ProformaInvoiceHeader.al
             until PurchInvHeader.Next() = 0;
     end;
 }
