@@ -57,5 +57,15 @@ tableextension 50102 "M3 Lot No. Info. Ext." extends "Lot No. Information"
             Caption = 'Subtotal';
             DataClassification = ToBeClassified;
         }
+        field(50011; "Proforma Invoice No."; Code[20])
+        {
+            Caption = 'Proforma Invoice No.';
+            DataClassification = ToBeClassified;
+        }
+        field(50012; "Item Desc"; Text[100])
+        {
+            Caption = 'Item Desc';
+            DataClassification = ToBeClassified;
+        }
     }
 }

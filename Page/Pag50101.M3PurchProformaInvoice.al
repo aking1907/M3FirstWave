@@ -4,6 +4,7 @@ page 50101 "M3 Purch. Proforma Invoice"
     Caption = 'M3 Purch. Proforma Invoice';
     PageType = Card;
     SourceTable = "M3 Proforma Invoice Header";
+    RefreshOnActivate = true;
 
     layout
     {
@@ -76,6 +77,8 @@ page 50101 "M3 Purch. Proforma Invoice"
             part(ProformaInvSubform; "M3 Proforma Invoice Subform")
             {
                 ApplicationArea = Basic, Suite;
+                SubPageLink = "Proforma Invoice No." = FIELD("No.");
+                UpdatePropagation = Both;
             }
         }
     }

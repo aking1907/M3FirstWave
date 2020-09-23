@@ -14,6 +14,7 @@ page 50102 "M3 Proforma Invoice Subform"
                 field("Certificate Number"; "Certificate Number")
                 {
                     Editable = false;
+                    Caption = 'Purch. Invoice No.';
                     ApplicationArea = All;
                     DrillDown = true;
 
@@ -39,11 +40,29 @@ page 50102 "M3 Proforma Invoice Subform"
                 {
                     ApplicationArea = All;
                     Editable = false;
+                    DrillDown = true;
+
+                    trigger OnDrillDown()
+                    var
+                        LOT: Record "Lot No. Information";
+                        LotPage: Page "Lot No. Information Card";
+                    begin
+                        if LOT.Get("Item No.", "Variant Code", "Lot No.") then begin
+                            LOT.SetRange("Lot No.", "Lot No.");
+                            LotPage.SetRecord(LOT);
+                            LotPage.SetTableView(LOT);
+                            LotPage.Run;
+                        end;
+                    end;
                 }
                 field("Item No."; "Item No.")
                 {
                     ApplicationArea = All;
                     Editable = false;
+                }
+                field("Item Desc"; "Item Desc")
+                {
+                    ApplicationArea = All;
                 }
                 field("Price Gross"; "Price Gross")
                 {
