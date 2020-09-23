@@ -2,18 +2,18 @@ table 50105 "M3 Proforma Invoice Header"
 {
     Caption = 'M3 Proforma Invoice Header';
     DataClassification = ToBeClassified;
-    Permissions = tabledata 122 = rimd;
+    Permissions = tabledata 122 = rimd, tabledata 6505 = rimd, tabledata 32 = rimd;
     LookupPageId = "M3 Purch. Proforma Invoice";
-    DrillDownPageId = "M3 Purch. Proforma Invoice";
-    DataCaptionFields = "No.", "Producer No.", "Shipper No.";
+    DrillDownPageId = "M3 Purchase Proforma Invoices";
+    DataCaptionFields = "No.";
 
     fields
     {
         field(10; "No."; Code[10])
         {
             Caption = 'No.';
-            Editable = false;
             DataClassification = ToBeClassified;
+            Editable = false;
         }
         field(20; "Document Date"; Date)
         {
@@ -182,6 +182,12 @@ table 50105 "M3 Proforma Invoice Header"
             Clustered = true;
         }
     }
+    fieldgroups
+    {
+        fieldgroup(DropDown; "No.", "Document Date", "Producer No.", "Consignee No.")
+        {
+        }
+    }
 
     trigger OnInsert()
     begin
@@ -200,18 +206,19 @@ table 50105 "M3 Proforma Invoice Header"
     var
         LblChangeConfirmation: Label 'Do you want to change %1?';
         NoSerMgt: Codeunit NoSeriesManagement;
+        ErrAssignProfInvNo: Label 'Lot No. was not found for Invoice No. = %1, Line No. = %2.  Proforma Invoice No. can not be assigned to the document.';
 
     procedure CopyFromPurchInvoice(var PurchInvoice: Record "Purch. Inv. Header")
     var
-        Vendor: Record Vendor;
+        Customer: Record Customer;
     begin
         Validate("Shipper No.", PurchInvoice."Buy-from Vendor No.");
         Validate("Producer No.", PurchInvoice."Buy-from Vendor No.");
         Validate("Consignee No.", PurchInvoice."Sell-to Customer No.");
         Validate("Delivery Basis", PurchInvoice."Shipment Method Code");
 
-        if Vendor.Get(PurchInvoice."Buy-from Vendor No.") then
-            "Delivery Basis Desc" := 'to fill ...';
+        if Customer.Get(PurchInvoice."Sell-to Customer No.") then
+            "Delivery Basis Desc" := Customer."Delivery Basis Desc";
 
     end;
 
@@ -230,6 +237,7 @@ table 50105 "M3 Proforma Invoice Header"
     var
         ProfInv: Record "M3 Proforma Invoice Header";
         PIH: Record "Purch. Inv. Header";
+        DocNo: Code[20];
     begin
         if not PurchInvHeader.FindSet() then exit;
 
@@ -250,16 +258,21 @@ table 50105 "M3 Proforma Invoice Header"
             exit;
         end;
 
-        ProfInv."No." := NoSerMgt.GetNextNo('PURCHPI', WorkDate(), true);
+        DocNo := NoSerMgt.GetNextNo('PURCHPI', WorkDate(), true);
+        ProfInv."No." := DocNo;
         ProfInv."Document Date" := WorkDate();
         ProfInv.Insert(true);
 
-        PurchInvHeader.ModifyAll("Proforma Invoice No.", ProfInv."No.");
-        UpdateLotNo(PurchInvHeader);
-
+        if PurchInvHeader.FindSet() then
+            repeat
+                PurchInvHeader."Proforma Invoice No." := ProfInv."No.";
+                PurchInvHeader.Modify();
+                UpdateLotNo(PurchInvHeader);
+            until PurchInvHeader.Next() = 0;
         PurchInvHeader.FindFirst();
         ProfInv.CopyFromPurchInvoice(PurchInvHeader);
         ProfInv.Modify(true);
+
     end;
 
     procedure RemovePIFromProformaInvoice(var PurchInvHeader: Record "Purch. Inv. Header")
@@ -277,6 +290,8 @@ table 50105 "M3 Proforma Invoice Header"
             PIH.TestField("Proforma Invoice No.", DocumentNo);
             PIH."Proforma Invoice No." := '';
             PIH.Modify();
+
+            UpdateLotNo(PIH);
         until PIH.Next() = 0;
 
         PIH.Reset();
@@ -289,20 +304,49 @@ table 50105 "M3 Proforma Invoice Header"
 
     local procedure UpdateLotNo(var PurchInvHeader: Record "Purch. Inv. Header")
     var
-        ILE: Record "Item Ledger Entry";
+        TmpILE: Record "Item Ledger Entry" temporary;
         LOT: Record "Lot No. Information";
+        ItemTrackingDocMgt: Codeunit "Item Tracking Doc. Management";
+        PurchInvLine: Record "Purch. Inv. Line";
     begin
+        if not TmpILE.IsTemporary then Error('');
+
         if PurchInvHeader.FindSet() then
             repeat
-                ILE.SetRange("Document No.", PurchInvHeader."No.");
-                ILE.SetRange("Document Type", ILE."Document Type"::"Purchase Invoice");
-                if ILE.FindSet() then
+                PurchInvLine.SetRange("Document No.", PurchInvHeader."No.");
+                if PurchInvLine.FindSet() then
                     repeat
+<<<<<<< HEAD:Tab50105.M3ProformaInvoiceHeader.al
                         Message('%1', ILE."Entry No.");
                         LOT.Get(ILE."Item No.", ILE."Variant Code", ILE."Lot No.");
                         LOT."Certificate Number" := PurchInvHeader."No.";
                         LOT.Modify();
                     until ILE.Next() = 0;
+=======
+                        TmpILE.Reset();
+                        TmpILE.DeleteAll();
+                        ItemTrackingDocMgt.RetrieveEntriesFromPostedInvoice(TmpILE, PurchInvLine.RowID1());
+                        if TmpILE.FindSet() then begin
+                            repeat
+                                if TmpILE."Lot No." <> '' then
+                                    if LOT.Get(TmpILE."Item No.", TmpILE."Variant Code", TmpILE."Lot No.") then begin
+                                        LOT."Certificate Number" := PurchInvHeader."No.";
+                                        LOT."Proforma Invoice No." := PurchInvHeader."Proforma Invoice No.";
+
+                                        if PurchInvHeader."Proforma Invoice No." = '' then
+                                            LOT."Certificate Number" := '';
+
+                                        if LOT."Item Desc" = '' then
+                                            LOT."Item Desc" := PurchInvLine.Description;
+
+                                        LOT.Modify();
+                                    end;
+                            until TmpILE.Next() = 0;
+                        end else
+                            Error(ErrAssignProfInvNo, PurchInvLine."Document No.", PurchInvLine."Line No.");
+
+                    until PurchInvLine.Next() = 0;
+>>>>>>> 0259a408d6c0179d879b9601d9b45b3e1a44db80:Table/Tab50105.M3ProformaInvoiceHeader.al
             until PurchInvHeader.Next() = 0;
     end;
 }
