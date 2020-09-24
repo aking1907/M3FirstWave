@@ -1,7 +1,7 @@
 page 50101 "M3 Purch. Proforma Invoice"
 {
 
-    Caption = 'M3 Purch. Proforma Invoice';
+    Caption = 'Purch. Proforma Invoice';
     PageType = Card;
     SourceTable = "M3 Proforma Invoice Header";
     RefreshOnActivate = true;

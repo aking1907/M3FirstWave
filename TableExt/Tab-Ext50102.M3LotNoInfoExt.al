@@ -11,6 +11,10 @@ tableextension 50102 "M3 Lot No. Info. Ext." extends "Lot No. Information"
         {
             Caption = 'Pure Content, %';
             DataClassification = ToBeClassified;
+            InitValue = 100;
+            DecimalPlaces = 0 : 4;
+            MinValue = 0;
+            MaxValue = 100;
         }
         field(50002; "Price Gross"; Decimal)
         {
@@ -26,11 +30,13 @@ tableextension 50102 "M3 Lot No. Info. Ext." extends "Lot No. Information"
         {
             Caption = 'Weight Gross';
             DataClassification = ToBeClassified;
+            DecimalPlaces = 0 : 3;
         }
         field(50005; "Weight Net"; Decimal)
         {
             Caption = 'Weight Net';
             DataClassification = ToBeClassified;
+            DecimalPlaces = 0 : 3;
         }
         field(50006; "Currency Code"; Code[5])
         {

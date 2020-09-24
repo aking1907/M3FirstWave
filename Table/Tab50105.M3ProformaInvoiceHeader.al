@@ -1,6 +1,6 @@
 table 50105 "M3 Proforma Invoice Header"
 {
-    Caption = 'M3 Proforma Invoice Header';
+    Caption = 'Proforma Invoice Header';
     DataClassification = ToBeClassified;
     Permissions = tabledata 122 = rimd, tabledata 6505 = rimd, tabledata 32 = rimd;
     LookupPageId = "M3 Purch. Proforma Invoice";
@@ -326,11 +326,25 @@ table 50105 "M3 Proforma Invoice Header"
                                         LOT."Certificate Number" := PurchInvHeader."No.";
                                         LOT."Proforma Invoice No." := PurchInvHeader."Proforma Invoice No.";
 
-                                        if PurchInvHeader."Proforma Invoice No." = '' then
+                                        if PurchInvHeader."Proforma Invoice No." = '' then begin
                                             LOT."Certificate Number" := '';
+                                        end else begin
+                                            if LOT."Item Desc" = '' then
+                                                LOT."Item Desc" := PurchInvLine.Description;
+                                            if LOT.Origin = '' then
+                                                LOT.Origin := '';
+                                            if LOT."Price Net" = 0 then
+                                                LOT."Price Net" := LOT."Price Net" * LOT."Pure Content, %" / 100;
+                                            if LOT."Currency Code" = '' then
+                                                LOT."Currency Code" := PurchInvHeader."Currency Code";
+                                            if LOT."Unit of Measure Code" = '' then
+                                                LOT."Unit of Measure Code" := PurchInvLine."Unit of Measure Code";
+                                            if LOT."Weight Gross" = 0 then
+                                                LOT."Weight Gross" := PurchInvLine."Gross Weight";
+                                            if LOT."Weight Net" = 0 then
+                                                LOT."Weight Net" := PurchInvLine."Net Weight";
+                                        end;
 
-                                        if LOT."Item Desc" = '' then
-                                            LOT."Item Desc" := PurchInvLine.Description;
 
                                         LOT.Modify();
                                     end;

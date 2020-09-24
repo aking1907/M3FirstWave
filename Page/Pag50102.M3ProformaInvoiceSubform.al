@@ -1,7 +1,7 @@
 page 50102 "M3 Proforma Invoice Subform"
 {
 
-    Caption = 'M3 Proforma Invoice Subform';
+    Caption = 'Proforma Invoice Subform';
     PageType = ListPart;
     SourceTable = "Lot No. Information";
 

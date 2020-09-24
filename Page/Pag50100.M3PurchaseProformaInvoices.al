@@ -1,6 +1,6 @@
 page 50100 "M3 Purchase Proforma Invoices"
 {
-    Caption = 'M3 Purchase Proforma Invoices';
+    Caption = 'Purchase Proforma Invoices';
     PageType = List;
     SourceTable = "M3 Proforma Invoice Header";
     UsageCategory = Lists;
