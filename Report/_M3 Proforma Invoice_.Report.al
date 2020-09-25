@@ -1,10 +1,9 @@
 report 50100 "M3 Proforma Invoice"
 {
     DefaultLayout = RDLC;
-    Caption = 'Proforma Invoice Printout';
+    RDLCLayout = './Report/ProformaInvoice.rdl';
+    Caption = 'Proforma Invoice';
     PreviewMode = PrintLayout;
-    ApplicationArea = All;
-    UsageCategory = Lists;
 
     dataset
     {
@@ -58,6 +57,7 @@ report 50100 "M3 Proforma Invoice"
             column(VATNoLbl; VATNoLbl)
             {
             }
+
             dataitem(ProfInvHeader; "M3 Proforma Invoice Header")
             {
                 DataItemTableView = SORTING("No.");
@@ -67,7 +67,7 @@ report 50100 "M3 Proforma Invoice"
                 column(ProformaInvoiceNoLbl; ProformaInvoiceNoLbl)
                 {
                 }
-                column(ProformaDate; Format("Document Date", 0, '<Day,2>.<Month,2>.<Year4>'))
+                column(ProformaDate; StrSubstNo('%1%2', DateLbl, format("Document Date", 0, '<Day,2>.<Month,2>.<Year4>')))
                 {
                 }
                 column(DateLbl; DateLbl)
@@ -112,10 +112,10 @@ report 50100 "M3 Proforma Invoice"
                 column(DeliveryBasisLbl; DeliveryBasisLbl)
                 {
                 }
-                column(DeliveryBasisDesc; "Delivery Basis Desc")
+                column(DeliveryBasisDesc; "Delivery Basis")
                 {
                 }
-                column(DocumentBasis; "Delivery Basis")
+                column(DocumentBasis; "Delivery Basis Desc")
                 {
                 }
                 dataitem(LotNoInfo; "Lot No. Information")
@@ -125,22 +125,63 @@ report 50100 "M3 Proforma Invoice"
                     column(ItemDesc; "Item Desc")
                     {
                     }
-                    column(ItemNetWeight; "Weight Net")
-                    {
-                    }
-                    column(ItemGrossWeight; "Weight Gross")
-                    {
-                    }
-                    column(ItemPrice; "Price Net")
-                    {
-                    }
-                    column(LineAmount; Subtotal)
+                    column(ContainerLbl; ContainerLbl)
                     {
                     }
                     column(ContainerName; "Container No.")
                     {
                     }
-                    column(CurrencyCode; "Currency Code")
+                    column(PureContentLbl; PureContentLbl)
+                    {
+
+                    }
+                    column(PureContent; format("Pure Content, %") + '%')
+                    {
+
+                    }
+                    column(PriceLbl; PriceLbl)
+                    {
+
+                    }
+                    column(PriceGross; StrSubstNo('%1 %2', "Price Gross", "Currency Code"))
+                    {
+
+                    }
+                    column(PriceContentLbl; PriceContentLbl)
+                    {
+
+                    }
+                    column(PriceNet; StrSubstNo('%1 %2', "Price Net", "Currency Code"))
+                    {
+
+                    }
+                    column(WeightNetLbl; WeightNetLbl)
+                    {
+
+                    }
+                    column(NetWeight; "Weight Net")
+                    {
+                    }
+                    column(WeightGrossLbl; WeightGrossLbl)
+                    {
+
+                    }
+                    column(GrossWeight; "Weight Gross")
+                    {
+                    }
+                    column(OriginLbl; OriginLbl)
+                    {
+
+                    }
+                    column(Origin; Origin)
+                    {
+
+                    }
+                    column(SubtotalLbl; SubtotalLbl)
+                    {
+
+                    }
+                    column(Subtotal; StrSubstNo('%1 %2', Subtotal, "Currency Code"))
                     {
                     }
                 }
@@ -196,6 +237,7 @@ report 50100 "M3 Proforma Invoice"
         CompanyInfo: Record "Company Information";
         GLSetup: Record "General Ledger Setup";
         Country: Record "Country/Region";
+
         //lables
         PhoneLbl: Label 'Phone';
         FaxLbl: Label 'Fax';
@@ -214,6 +256,7 @@ report 50100 "M3 Proforma Invoice"
         ContainerLbl: label 'Container:';
         PureContentLbl: Label 'Pure content:';
         PriceLbl: Label 'Price:';
+        PriceContentLbl: Label 'Content price:';
         WeightNetLbl: Label 'Weight net:';
         WeightGrossLbl: Label 'Weight gross:';
         SizeLbl: Label 'Size';
@@ -228,6 +271,7 @@ report 50100 "M3 Proforma Invoice"
         CompanyInfo.CalcFields(Picture);
         Country.Get(CompanyInfo."Country/Region Code");
         ShortAddress := StrSubstNo('%1-%2 %3', CompanyInfo."Country/Region Code", CompanyInfo."Post Code", CompanyInfo.City);
+        ProformaNo := 'PI00000005';
     end;
 
     trigger OnPreReport()
