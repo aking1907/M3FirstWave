@@ -1,4 +1,4 @@
-report 50100 "M3 Proforma Invoice"
+report 50100 "M3 Proforma Invoice New"
 {
     DefaultLayout = RDLC;
     Caption = 'Proforma Invoice Printout';
@@ -57,6 +57,10 @@ report 50100 "M3 Proforma Invoice"
             }
             column(VATNoLbl; VATNoLbl)
             {
+            }
+            dataitem(ReportBodyTbl; ReportBody)
+            {
+
             }
             dataitem(ProfInvHeader; "M3 Proforma Invoice Header")
             {
@@ -196,6 +200,7 @@ report 50100 "M3 Proforma Invoice"
         CompanyInfo: Record "Company Information";
         GLSetup: Record "General Ledger Setup";
         Country: Record "Country/Region";
+        
         //lables
         PhoneLbl: Label 'Phone';
         FaxLbl: Label 'Fax';

@@ -80,8 +80,10 @@ pageextension 50103 "M3 Posted Purch. Invoices Ext." extends "Posted Purchase In
 
                 trigger OnAction()
                 var
+                    PIReport: Report "M3 Proforma Invoice";
                 begin
-                    Message('Proforma Invoice will print in near future.');
+                    PIReport.InitData("No.", "Proforma Invoice No.");
+                    PIReport.RunModal();
                 end;
             }
         }
