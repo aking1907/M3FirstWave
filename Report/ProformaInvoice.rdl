@@ -1988,6 +1988,9 @@ End Function
         <Field Name="VATNoLbl">
           <DataField>VATNoLbl</DataField>
         </Field>
+        <Field Name="TotalAmpountText">
+          <DataField>TotalAmpountText</DataField>
+        </Field>
         <Field Name="ProformaNo">
           <DataField>ProformaNo</DataField>
         </Field>
