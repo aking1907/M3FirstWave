@@ -15,16 +15,32 @@ tableextension 50102 "M3 Lot No. Info. Ext." extends "Lot No. Information"
             DecimalPlaces = 0 : 4;
             MinValue = 0;
             MaxValue = 100;
+
+            trigger OnValidate()
+            begin
+                "Price Net" := Round("Pure Content, %" * "Price Gross" / 100, 0.01, '=');
+                Subtotal := Round("Price Net" * "Weight Net", 0.01, '=');
+            end;
         }
         field(50002; "Price Gross"; Decimal)
         {
             Caption = 'Price Gross';
             DataClassification = ToBeClassified;
+
+            trigger OnValidate()
+            begin
+                Validate("Pure Content, %");
+            end;
         }
         field(50003; "Price Net"; Decimal)
         {
             Caption = 'Price Net';
             DataClassification = ToBeClassified;
+
+            trigger OnValidate()
+            begin
+                Subtotal := Round("Price Net" * "Weight Net", 0.01, '=');
+            end;
         }
         field(50004; "Weight Gross"; Decimal)
         {
@@ -37,6 +53,11 @@ tableextension 50102 "M3 Lot No. Info. Ext." extends "Lot No. Information"
             Caption = 'Weight Net';
             DataClassification = ToBeClassified;
             DecimalPlaces = 0 : 3;
+
+            trigger OnValidate()
+            begin
+                Validate("Pure Content, %");
+            end;
         }
         field(50006; "Currency Code"; Code[5])
         {

@@ -72,6 +72,10 @@ page 50102 "M3 Proforma Invoice Subform"
                 {
                     ApplicationArea = All;
                 }
+                field("Currency Code"; "Currency Code")
+                {
+                    ApplicationArea = All;
+                }
                 field("Pure Content, %"; "Pure Content, %")
                 {
                     ApplicationArea = All;

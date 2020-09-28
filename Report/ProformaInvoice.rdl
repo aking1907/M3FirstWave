@@ -11,465 +11,193 @@
       <rd:DataSourceID>0e88d126-6e15-4b4b-ac7d-111c6bd98eec</rd:DataSourceID>
     </DataSource>
   </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+      <Fields>
+        <Field Name="Logo">
+          <DataField>Logo</DataField>
+        </Field>
+        <Field Name="Address">
+          <DataField>Address</DataField>
+        </Field>
+        <Field Name="Address2">
+          <DataField>Address2</DataField>
+        </Field>
+        <Field Name="ShortAddress">
+          <DataField>ShortAddress</DataField>
+        </Field>
+        <Field Name="CountryName">
+          <DataField>CountryName</DataField>
+        </Field>
+        <Field Name="Phone">
+          <DataField>Phone</DataField>
+        </Field>
+        <Field Name="PhoneLbl">
+          <DataField>PhoneLbl</DataField>
+        </Field>
+        <Field Name="Fax">
+          <DataField>Fax</DataField>
+        </Field>
+        <Field Name="FaxLbl">
+          <DataField>FaxLbl</DataField>
+        </Field>
+        <Field Name="Email">
+          <DataField>Email</DataField>
+        </Field>
+        <Field Name="EmailLbl">
+          <DataField>EmailLbl</DataField>
+        </Field>
+        <Field Name="HomePage">
+          <DataField>HomePage</DataField>
+        </Field>
+        <Field Name="HttpLbl">
+          <DataField>HttpLbl</DataField>
+        </Field>
+        <Field Name="VATNo">
+          <DataField>VATNo</DataField>
+        </Field>
+        <Field Name="VATNoLbl">
+          <DataField>VATNoLbl</DataField>
+        </Field>
+        <Field Name="TotalAmountText">
+          <DataField>TotalAmountText</DataField>
+        </Field>
+        <Field Name="FooterText">
+          <DataField>FooterText</DataField>
+        </Field>
+        <Field Name="ProformaNo">
+          <DataField>ProformaNo</DataField>
+        </Field>
+        <Field Name="ProformaInvoiceNoLbl">
+          <DataField>ProformaInvoiceNoLbl</DataField>
+        </Field>
+        <Field Name="ProformaDate">
+          <DataField>ProformaDate</DataField>
+        </Field>
+        <Field Name="DateLbl">
+          <DataField>DateLbl</DataField>
+        </Field>
+        <Field Name="ShipperLbl">
+          <DataField>ShipperLbl</DataField>
+        </Field>
+        <Field Name="ShipperDesc">
+          <DataField>ShipperDesc</DataField>
+        </Field>
+        <Field Name="ProducerLbl">
+          <DataField>ProducerLbl</DataField>
+        </Field>
+        <Field Name="ProducerDesc">
+          <DataField>ProducerDesc</DataField>
+        </Field>
+        <Field Name="ConsigneeLbl">
+          <DataField>ConsigneeLbl</DataField>
+        </Field>
+        <Field Name="ConsigneeDesc">
+          <DataField>ConsigneeDesc</DataField>
+        </Field>
+        <Field Name="LoadingPointLbl">
+          <DataField>LoadingPointLbl</DataField>
+        </Field>
+        <Field Name="LoadingPointDesc">
+          <DataField>LoadingPointDesc</DataField>
+        </Field>
+        <Field Name="ContainersLbl">
+          <DataField>ContainersLbl</DataField>
+        </Field>
+        <Field Name="ContainersDesc">
+          <DataField>ContainersDesc</DataField>
+        </Field>
+        <Field Name="DeliveryPointLbl">
+          <DataField>DeliveryPointLbl</DataField>
+        </Field>
+        <Field Name="DeliveryPointDesc">
+          <DataField>DeliveryPointDesc</DataField>
+        </Field>
+        <Field Name="DeliveryBasisLbl">
+          <DataField>DeliveryBasisLbl</DataField>
+        </Field>
+        <Field Name="DeliveryBasisDesc">
+          <DataField>DeliveryBasisDesc</DataField>
+        </Field>
+        <Field Name="DocumentBasis">
+          <DataField>DocumentBasis</DataField>
+        </Field>
+        <Field Name="ItemDesc">
+          <DataField>ItemDesc</DataField>
+        </Field>
+        <Field Name="ContainerLbl">
+          <DataField>ContainerLbl</DataField>
+        </Field>
+        <Field Name="ContainerName">
+          <DataField>ContainerName</DataField>
+        </Field>
+        <Field Name="PureContentLbl">
+          <DataField>PureContentLbl</DataField>
+        </Field>
+        <Field Name="PureContent">
+          <DataField>PureContent</DataField>
+        </Field>
+        <Field Name="PriceLbl">
+          <DataField>PriceLbl</DataField>
+        </Field>
+        <Field Name="PriceGross">
+          <DataField>PriceGross</DataField>
+        </Field>
+        <Field Name="PriceContentLbl">
+          <DataField>PriceContentLbl</DataField>
+        </Field>
+        <Field Name="PriceNet">
+          <DataField>PriceNet</DataField>
+        </Field>
+        <Field Name="WeightNetLbl">
+          <DataField>WeightNetLbl</DataField>
+        </Field>
+        <Field Name="NetWeight">
+          <DataField>NetWeight</DataField>
+        </Field>
+        <Field Name="NetWeightFormat">
+          <DataField>NetWeightFormat</DataField>
+        </Field>
+        <Field Name="WeightGrossLbl">
+          <DataField>WeightGrossLbl</DataField>
+        </Field>
+        <Field Name="GrossWeight">
+          <DataField>GrossWeight</DataField>
+        </Field>
+        <Field Name="GrossWeightFormat">
+          <DataField>GrossWeightFormat</DataField>
+        </Field>
+        <Field Name="OriginLbl">
+          <DataField>OriginLbl</DataField>
+        </Field>
+        <Field Name="Origin">
+          <DataField>Origin</DataField>
+        </Field>
+        <Field Name="SubtotalLbl">
+          <DataField>SubtotalLbl</DataField>
+        </Field>
+        <Field Name="Subtotal">
+          <DataField>Subtotal</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
         <ReportItems>
-          <Textbox Name="Address">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!Address.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Address</rd:DefaultName>
-            <Top>0.21056in</Top>
-            <Left>6.55916in</Left>
-            <Height>0.12in</Height>
-            <Width>1.67917in</Width>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-            </Style>
-          </Textbox>
-          <Image Name="Image1">
-            <Source>Database</Source>
-            <Value>=First(Fields!Logo.Value, "DataSet_Result")</Value>
-            <MIMEType>image/jpeg</MIMEType>
-            <Sizing>FitProportional</Sizing>
-            <Top>0.37444in</Top>
-            <Left>0.24875in</Left>
-            <Height>0.47695in</Height>
-            <Width>2.01042in</Width>
-            <ZIndex>1</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Image>
-          <Textbox Name="Address2">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!Address2.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Address2</rd:DefaultName>
-            <Top>0.33833in</Top>
-            <Left>6.55916in</Left>
-            <Height>0.12in</Height>
-            <Width>1.67778in</Width>
-            <ZIndex>2</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-            </Style>
-          </Textbox>
-          <Textbox Name="ShortAddress">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!ShortAddress.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>ShortAddress</rd:DefaultName>
-            <Top>0.46611in</Top>
-            <Left>6.55916in</Left>
-            <Height>0.12in</Height>
-            <Width>1.67917in</Width>
-            <ZIndex>3</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-            </Style>
-          </Textbox>
-          <Textbox Name="CountryName">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!CountryName.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>CountryName</rd:DefaultName>
-            <Top>0.59111in</Top>
-            <Left>6.55916in</Left>
-            <Height>0.12in</Height>
-            <Width>1.67917in</Width>
-            <ZIndex>4</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-            </Style>
-          </Textbox>
-          <Line Name="Line1">
-            <Top>0.7175in</Top>
-            <Left>8.23833in</Left>
-            <Height>0in</Height>
-            <Width>-5.9375in</Width>
-            <ZIndex>5</ZIndex>
-            <Style>
-              <Border>
-                <Style>Solid</Style>
-              </Border>
-            </Style>
-          </Line>
-          <Textbox Name="PhoneLbl">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!PhoneLbl.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>PhoneLbl</rd:DefaultName>
-            <Top>0.73139in</Top>
-            <Left>6.57305in</Left>
-            <Height>0.12in</Height>
-            <Width>0.51042in</Width>
-            <ZIndex>6</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-            </Style>
-          </Textbox>
-          <Textbox Name="Phone">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!Phone.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Phone</rd:DefaultName>
-            <Top>0.72861in</Top>
-            <Left>7.06958in</Left>
-            <Height>0.12in</Height>
-            <Width>1.16875in</Width>
-            <ZIndex>7</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-            </Style>
-          </Textbox>
-          <Textbox Name="Fax">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!Fax.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Fax</rd:DefaultName>
-            <Top>0.84528in</Top>
-            <Left>7.06958in</Left>
-            <Height>0.12in</Height>
-            <Width>1.16875in</Width>
-            <ZIndex>8</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-            </Style>
-          </Textbox>
-          <Textbox Name="FaxLbl">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!FaxLbl.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>FaxLbl</rd:DefaultName>
-            <Top>0.84528in</Top>
-            <Left>6.57305in</Left>
-            <Height>0.12in</Height>
-            <Width>0.51042in</Width>
-            <ZIndex>9</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-            </Style>
-          </Textbox>
-          <Textbox Name="Email">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!Email.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Email</rd:DefaultName>
-            <Top>0.96194in</Top>
-            <Left>7.06958in</Left>
-            <Height>0.12in</Height>
-            <Width>1.16875in</Width>
-            <ZIndex>10</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-            </Style>
-          </Textbox>
-          <Textbox Name="EmailLbl">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!EmailLbl.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>EmailLbl</rd:DefaultName>
-            <Top>0.96194in</Top>
-            <Left>6.57305in</Left>
-            <Height>0.12in</Height>
-            <Width>0.48264in</Width>
-            <ZIndex>11</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-            </Style>
-          </Textbox>
-          <Textbox Name="HomePage">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!HomePage.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>HomePage</rd:DefaultName>
-            <Top>1.08833in</Top>
-            <Left>7.06819in</Left>
-            <Height>0.12in</Height>
-            <Width>1.16875in</Width>
-            <ZIndex>12</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-            </Style>
-          </Textbox>
-          <Textbox Name="HttpLbl">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!HttpLbl.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>HttpLbl</rd:DefaultName>
-            <Top>1.07861in</Top>
-            <Left>6.57305in</Left>
-            <Height>0.12in</Height>
-            <Width>0.49514in</Width>
-            <ZIndex>13</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-            </Style>
-          </Textbox>
-          <Textbox Name="VATNo">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!VATNo.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>VATNo</rd:DefaultName>
-            <Top>1.20083in</Top>
-            <Left>7.06958in</Left>
-            <Height>0.12in</Height>
-            <Width>1.16875in</Width>
-            <ZIndex>14</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-            </Style>
-          </Textbox>
-          <Textbox Name="VATNoLbl">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!VATNoLbl.Value, "DataSet_Result")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>VATNoLbl</rd:DefaultName>
-            <Top>1.19389in</Top>
-            <Left>6.57305in</Left>
-            <Height>0.12in</Height>
-            <Width>0.49653in</Width>
-            <ZIndex>15</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-            </Style>
-          </Textbox>
           <Tablix Name="Tablix5">
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>2.01042in</Width>
+                  <Width>1.84271in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>5.97916in</Width>
+                  <Width>5.81145in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -1056,7 +784,7 @@
                   </TablixCells>
                 </TablixRow>
                 <TablixRow>
-                  <Height>0.25in</Height>
+                  <Height>0.16667in</Height>
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
@@ -1148,11 +876,10 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
-            <Top>4.35292in</Top>
+            <Top>2.94667in</Top>
             <Left>0.24875in</Left>
-            <Height>2.39584in</Height>
-            <Width>7.98958in</Width>
-            <ZIndex>16</ZIndex>
+            <Height>2.31251in</Height>
+            <Width>7.65416in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1163,13 +890,13 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>3.89753in</Width>
+                  <Width>3.776in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.8422in</Width>
+                  <Width>2.72067in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.24845in</Width>
+                  <Width>1.12692in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -1307,11 +1034,11 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
-            <Top>1.46041in</Top>
-            <Left>0.24875in</Left>
+            <Top>0.21041in</Top>
+            <Left>0.27931in</Left>
             <Height>0.5in</Height>
-            <Width>7.98819in</Width>
-            <ZIndex>17</ZIndex>
+            <Width>7.62359in</Width>
+            <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1322,10 +1049,10 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1.63611in</Width>
+                  <Width>1.45312in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>6.35347in</Width>
+                  <Width>6.17048in</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -1871,36 +1598,576 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>DataSet_Result</DataSetName>
-            <Top>2.02986in</Top>
-            <Left>0.24875in</Left>
+            <Top>0.77986in</Top>
+            <Left>0.27931in</Left>
             <Height>2in</Height>
-            <Width>7.98958in</Width>
-            <ZIndex>18</ZIndex>
+            <Width>7.6236in</Width>
+            <ZIndex>2</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
             </Style>
           </Tablix>
+          <Textbox Name="FooterText1">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!TotalAmountText.Value, "DataSet_Result")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>FooterText1</rd:DefaultName>
+            <Top>5.47446in</Top>
+            <Left>0.28348in</Left>
+            <Height>0.23611in</Height>
+            <Width>7.62082in</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>11.7in</Height>
+        <Height>5.76959in</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
           <BottomBorder>
             <Color>Black</Color>
-            <Style>Solid</Style>
+            <Style>None</Style>
             <Width>1pt</Width>
           </BottomBorder>
         </Style>
       </Body>
-      <Width>8.60152in</Width>
+      <Width>8.24in</Width>
       <Page>
+        <PageHeader>
+          <Height>1.39777in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="Address">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!Address.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Address</rd:DefaultName>
+              <Top>0.24723in</Top>
+              <Left>6.22513in</Left>
+              <Height>0.12in</Height>
+              <Width>1.67917in</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+              </Style>
+            </Textbox>
+            <Image Name="Image1">
+              <Source>Database</Source>
+              <Value>=First(Fields!Logo.Value, "DataSet_Result")</Value>
+              <MIMEType>image/jpeg</MIMEType>
+              <Sizing>FitProportional</Sizing>
+              <Top>0.41111in</Top>
+              <Left>0.2807in</Left>
+              <Height>0.47695in</Height>
+              <Width>2.01042in</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
+            </Image>
+            <Textbox Name="Address2">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!Address2.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Address2</rd:DefaultName>
+              <Top>0.375in</Top>
+              <Left>6.22513in</Left>
+              <Height>0.12in</Height>
+              <Width>1.67778in</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+              </Style>
+            </Textbox>
+            <Textbox Name="ShortAddress">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!ShortAddress.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>ShortAddress</rd:DefaultName>
+              <Top>0.50278in</Top>
+              <Left>6.22513in</Left>
+              <Height>0.12in</Height>
+              <Width>1.67917in</Width>
+              <ZIndex>3</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+              </Style>
+            </Textbox>
+            <Textbox Name="CountryName">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!CountryName.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>CountryName</rd:DefaultName>
+              <Top>0.62778in</Top>
+              <Left>6.22513in</Left>
+              <Height>0.12in</Height>
+              <Width>1.67917in</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+              </Style>
+            </Textbox>
+            <Line Name="Line1">
+              <Top>0.75417in</Top>
+              <Left>7.9043in</Left>
+              <Height>0in</Height>
+              <Width>-5.51846in</Width>
+              <ZIndex>5</ZIndex>
+              <Style>
+                <Border>
+                  <Style>Solid</Style>
+                </Border>
+              </Style>
+            </Line>
+            <Textbox Name="PhoneLbl">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!PhoneLbl.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>PhoneLbl</rd:DefaultName>
+              <Top>0.76806in</Top>
+              <Left>6.23902in</Left>
+              <Height>0.12in</Height>
+              <Width>0.51042in</Width>
+              <ZIndex>6</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+              </Style>
+            </Textbox>
+            <Textbox Name="Phone">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!Phone.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Phone</rd:DefaultName>
+              <Top>0.76528in</Top>
+              <Left>6.73555in</Left>
+              <Height>0.12in</Height>
+              <Width>1.16875in</Width>
+              <ZIndex>7</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+              </Style>
+            </Textbox>
+            <Textbox Name="Fax">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!Fax.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Fax</rd:DefaultName>
+              <Top>0.88195in</Top>
+              <Left>6.73555in</Left>
+              <Height>0.12in</Height>
+              <Width>1.16875in</Width>
+              <ZIndex>8</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+              </Style>
+            </Textbox>
+            <Textbox Name="FaxLbl">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!FaxLbl.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>FaxLbl</rd:DefaultName>
+              <Top>0.88195in</Top>
+              <Left>6.23902in</Left>
+              <Height>0.12in</Height>
+              <Width>0.51042in</Width>
+              <ZIndex>9</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+              </Style>
+            </Textbox>
+            <Textbox Name="Email">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!Email.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Email</rd:DefaultName>
+              <Top>0.99861in</Top>
+              <Left>6.73555in</Left>
+              <Height>0.12in</Height>
+              <Width>1.16875in</Width>
+              <ZIndex>10</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+              </Style>
+            </Textbox>
+            <Textbox Name="EmailLbl">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!EmailLbl.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>EmailLbl</rd:DefaultName>
+              <Top>0.99861in</Top>
+              <Left>6.23902in</Left>
+              <Height>0.12in</Height>
+              <Width>0.48264in</Width>
+              <ZIndex>11</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+              </Style>
+            </Textbox>
+            <Textbox Name="HomePage">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!HomePage.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>HomePage</rd:DefaultName>
+              <Top>1.125in</Top>
+              <Left>6.73416in</Left>
+              <Height>0.12in</Height>
+              <Width>1.16875in</Width>
+              <ZIndex>12</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+              </Style>
+            </Textbox>
+            <Textbox Name="HttpLbl">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!HttpLbl.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>HttpLbl</rd:DefaultName>
+              <Top>1.11528in</Top>
+              <Left>6.23902in</Left>
+              <Height>0.12in</Height>
+              <Width>0.49514in</Width>
+              <ZIndex>13</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+              </Style>
+            </Textbox>
+            <Textbox Name="VATNo">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!VATNo.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>VATNo</rd:DefaultName>
+              <Top>1.2375in</Top>
+              <Left>6.73555in</Left>
+              <Height>0.12in</Height>
+              <Width>1.16875in</Width>
+              <ZIndex>14</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+              </Style>
+            </Textbox>
+            <Textbox Name="VATNoLbl">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!VATNoLbl.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>VATNoLbl</rd:DefaultName>
+              <Top>1.23056in</Top>
+              <Left>6.23902in</Left>
+              <Height>0.12in</Height>
+              <Width>0.49653in</Width>
+              <ZIndex>15</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageHeader>
+        <PageFooter>
+          <Height>0.4in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="FooterText">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=First(Fields!FooterText.Value, "DataSet_Result")</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>FooterText</rd:DefaultName>
+              <Top>0.06944in</Top>
+              <Left>0.24875in</Left>
+              <Height>0.15625in</Height>
+              <Width>7.65416in</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageFooter>
         <Style />
       </Page>
     </ReportSection>
   </ReportSections>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -1940,176 +2207,4 @@ End Function
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Fields>
-        <Field Name="Logo">
-          <DataField>Logo</DataField>
-        </Field>
-        <Field Name="Address">
-          <DataField>Address</DataField>
-        </Field>
-        <Field Name="Address2">
-          <DataField>Address2</DataField>
-        </Field>
-        <Field Name="ShortAddress">
-          <DataField>ShortAddress</DataField>
-        </Field>
-        <Field Name="CountryName">
-          <DataField>CountryName</DataField>
-        </Field>
-        <Field Name="Phone">
-          <DataField>Phone</DataField>
-        </Field>
-        <Field Name="PhoneLbl">
-          <DataField>PhoneLbl</DataField>
-        </Field>
-        <Field Name="Fax">
-          <DataField>Fax</DataField>
-        </Field>
-        <Field Name="FaxLbl">
-          <DataField>FaxLbl</DataField>
-        </Field>
-        <Field Name="Email">
-          <DataField>Email</DataField>
-        </Field>
-        <Field Name="EmailLbl">
-          <DataField>EmailLbl</DataField>
-        </Field>
-        <Field Name="HomePage">
-          <DataField>HomePage</DataField>
-        </Field>
-        <Field Name="HttpLbl">
-          <DataField>HttpLbl</DataField>
-        </Field>
-        <Field Name="VATNo">
-          <DataField>VATNo</DataField>
-        </Field>
-        <Field Name="VATNoLbl">
-          <DataField>VATNoLbl</DataField>
-        </Field>
-        <Field Name="TotalAmpountText">
-          <DataField>TotalAmpountText</DataField>
-        </Field>
-        <Field Name="ProformaNo">
-          <DataField>ProformaNo</DataField>
-        </Field>
-        <Field Name="ProformaInvoiceNoLbl">
-          <DataField>ProformaInvoiceNoLbl</DataField>
-        </Field>
-        <Field Name="ProformaDate">
-          <DataField>ProformaDate</DataField>
-        </Field>
-        <Field Name="DateLbl">
-          <DataField>DateLbl</DataField>
-        </Field>
-        <Field Name="ShipperLbl">
-          <DataField>ShipperLbl</DataField>
-        </Field>
-        <Field Name="ShipperDesc">
-          <DataField>ShipperDesc</DataField>
-        </Field>
-        <Field Name="ProducerLbl">
-          <DataField>ProducerLbl</DataField>
-        </Field>
-        <Field Name="ProducerDesc">
-          <DataField>ProducerDesc</DataField>
-        </Field>
-        <Field Name="ConsigneeLbl">
-          <DataField>ConsigneeLbl</DataField>
-        </Field>
-        <Field Name="ConsigneeDesc">
-          <DataField>ConsigneeDesc</DataField>
-        </Field>
-        <Field Name="LoadingPointLbl">
-          <DataField>LoadingPointLbl</DataField>
-        </Field>
-        <Field Name="LoadingPointDesc">
-          <DataField>LoadingPointDesc</DataField>
-        </Field>
-        <Field Name="ContainersLbl">
-          <DataField>ContainersLbl</DataField>
-        </Field>
-        <Field Name="ContainersDesc">
-          <DataField>ContainersDesc</DataField>
-        </Field>
-        <Field Name="DeliveryPointLbl">
-          <DataField>DeliveryPointLbl</DataField>
-        </Field>
-        <Field Name="DeliveryPointDesc">
-          <DataField>DeliveryPointDesc</DataField>
-        </Field>
-        <Field Name="DeliveryBasisLbl">
-          <DataField>DeliveryBasisLbl</DataField>
-        </Field>
-        <Field Name="DeliveryBasisDesc">
-          <DataField>DeliveryBasisDesc</DataField>
-        </Field>
-        <Field Name="DocumentBasis">
-          <DataField>DocumentBasis</DataField>
-        </Field>
-        <Field Name="ItemDesc">
-          <DataField>ItemDesc</DataField>
-        </Field>
-        <Field Name="ContainerLbl">
-          <DataField>ContainerLbl</DataField>
-        </Field>
-        <Field Name="ContainerName">
-          <DataField>ContainerName</DataField>
-        </Field>
-        <Field Name="PureContentLbl">
-          <DataField>PureContentLbl</DataField>
-        </Field>
-        <Field Name="PureContent">
-          <DataField>PureContent</DataField>
-        </Field>
-        <Field Name="PriceLbl">
-          <DataField>PriceLbl</DataField>
-        </Field>
-        <Field Name="PriceGross">
-          <DataField>PriceGross</DataField>
-        </Field>
-        <Field Name="PriceContentLbl">
-          <DataField>PriceContentLbl</DataField>
-        </Field>
-        <Field Name="PriceNet">
-          <DataField>PriceNet</DataField>
-        </Field>
-        <Field Name="WeightNetLbl">
-          <DataField>WeightNetLbl</DataField>
-        </Field>
-        <Field Name="NetWeight">
-          <DataField>NetWeight</DataField>
-        </Field>
-        <Field Name="NetWeightFormat">
-          <DataField>NetWeightFormat</DataField>
-        </Field>
-        <Field Name="WeightGrossLbl">
-          <DataField>WeightGrossLbl</DataField>
-        </Field>
-        <Field Name="GrossWeight">
-          <DataField>GrossWeight</DataField>
-        </Field>
-        <Field Name="GrossWeightFormat">
-          <DataField>GrossWeightFormat</DataField>
-        </Field>
-        <Field Name="OriginLbl">
-          <DataField>OriginLbl</DataField>
-        </Field>
-        <Field Name="Origin">
-          <DataField>Origin</DataField>
-        </Field>
-        <Field Name="SubtotalLbl">
-          <DataField>SubtotalLbl</DataField>
-        </Field>
-        <Field Name="Subtotal">
-          <DataField>Subtotal</DataField>
-        </Field>
-      </Fields>
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-    </DataSet>
-  </DataSets>
 </Report>

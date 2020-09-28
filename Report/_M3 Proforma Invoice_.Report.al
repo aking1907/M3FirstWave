@@ -14,8 +14,7 @@ report 50100 "M3 Proforma Invoice"
             column(Logo; CompanyInfo.Picture)
             {
             }
-            column(Address;
-            CompanyInfo.Address)
+            column(Address; CompanyInfo.Address)
             {
             }
             column("Address2"; CompanyInfo."Address 2")
@@ -57,7 +56,10 @@ report 50100 "M3 Proforma Invoice"
             column(VATNoLbl; VATNoLbl)
             {
             }
-            column(TotalAmpountText; TotalAmountText)
+            column(TotalAmountText; TotalAmountText)
+            {
+            }
+            column(FooterText; FooterText)
             {
             }
             dataitem(ProfInvHeader; "M3 Proforma Invoice Header")
@@ -191,7 +193,15 @@ report 50100 "M3 Proforma Invoice"
             trigger OnPreDataItem()
             begin
                 ContainersDesc := GetListOfContainers();
-                Error(FormatTotalAmountText());
+                TotalAmountText := GetTotalAmountText();
+                FooterText := StrSubstNo(FooterTextLbl,
+                                         CompanyInfo.Address,
+                                         CompanyInfo."Ship-to Address 2",
+                                         ShortAddress,
+                                         Country.Name,
+                                         PhoneLbl + CompanyInfo."Phone No.",
+                                         FaxLbl + CompanyInfo."Fax No."
+                                        );
             end;
         }
     }
@@ -204,12 +214,6 @@ report 50100 "M3 Proforma Invoice"
                 group(GroupName)
                 {
                     Caption = 'Options';
-
-                    // field(NoOfCopies; NoOfCopies)
-                    // {
-                    //     ApplicationArea = Suite;
-                    //     Caption = 'No. of Copies';
-                    // }
                     field(ProformaNo; ProformaNo)
                     {
                         ApplicationArea = Suite;
@@ -231,12 +235,10 @@ report 50100 "M3 Proforma Invoice"
         }
     }
     var
-        NoOfCopies: Integer;
         ProformaNo: Code[20];
         PurchaseInvoiceNo: Code[20];
         ShortAddress: Text[100];
         ContainersDesc: Text[250];
-        TotalAmount: Decimal;
         TotalAmountText: Text[150];
         OnesText: Array[20] of Text[30];
         TensText: Array[10] of Text[30];
@@ -246,7 +248,7 @@ report 50100 "M3 Proforma Invoice"
         GLSetup: Record "General Ledger Setup";
         Country: Record "Country/Region";
         ReportCheck: Report Check;
-
+        FooterText: Text[250];
         //lables
         PhoneLbl: Label 'Phone';
         FaxLbl: Label 'Fax';
@@ -272,6 +274,8 @@ report 50100 "M3 Proforma Invoice"
         OriginLbl: Label 'Origin:';
         SubtotalLbl: Label 'Subtotal';
         ErrInputData: Label 'Error input data!';
+        TotalAmountTextLbl: Label 'Total sum %1 %2 (%3 and %4) shall not be paid and is given for customs purposes only. Property of %5.';
+        FooterTextLbl: Label '%1 - %2 - %3 - %4 - %5 - %6';
 
     trigger OnInitReport()
     begin
@@ -280,7 +284,6 @@ report 50100 "M3 Proforma Invoice"
         CompanyInfo.CalcFields(Picture);
         Country.Get(CompanyInfo."Country/Region Code");
         ShortAddress := StrSubstNo('%1-%2 %3', CompanyInfo."Country/Region Code", CompanyInfo."Post Code", CompanyInfo.City);
-        ProformaNo := 'PI00000005';
     end;
 
     trigger OnPreReport()
@@ -305,31 +308,41 @@ report 50100 "M3 Proforma Invoice"
     begin
         ProformaNo := ProformaInvNo;
         PurchaseInvoiceNo := PurchInvHeaderNo;
-        NoOfCopies := 1;
     end;
 
-    local procedure FormatTotalAmountText(): Text[150]
+    local procedure GetTotalAmountText(): Text[150]
     var
         Lot: Record "Lot No. Information";
         PIH: Record "Purch. Inv. Header";
         CurrencyCode: Code[5];
+        CurrNoteName: Text[20];
+        CurrCoinName: Text[20];
         TextArray: Array[2] of Text[80];
+        Currency: Record Currency;
+        TotalAmount: Decimal;
     begin
         Lot.SetRange("Proforma Invoice No.", ProformaNo);
         if Lot.IsEmpty then exit('');
         if Lot.FindSet() then
             repeat
-                if PIH.Get(Lot."Certificate Number") then begin
-                    PIH.CalcFields("Amount Including VAT");
-                    TotalAmount += PIH."Amount Including VAT";
-                    CurrencyCode := pih."Currency Code";
-                end;
+                TotalAmount += Lot.Subtotal;
+                CurrencyCode := lot."Currency Code";
             until Lot.Next() = 0;
 
+        CurrNoteName := 'dollar';
+        CurrCoinName := 'cent';
+
+        if Currency.Get(CurrencyCode) then
+            CurrNoteName := LowerCase(Currency.Description)
+        else
+            if Currency.Get(GLSetup."LCY Code") then
+                CurrNoteName := LowerCase(Currency.Description);
+
         InitTextVariables;
-        Error(StrSubstNo('%1 and %2',
-                NumberToWords(round(TotalAmount, 1, '<'), 'dollars'),
-                NumberToWords(round(TotalAmount * 100, 1, '<') mod 100, 'cents')
+        exit(StrSubstNo(TotalAmountTextLbl, TotalAmount, CurrencyCode,
+                NumberToWords(round(TotalAmount, 1, '<'), CurrNoteName),
+                NumberToWords(round(TotalAmount * 100, 1, '<') mod 100, CurrCoinName),
+                CompanyName
             ));
 
     end;
@@ -342,30 +355,36 @@ report 50100 "M3 Proforma Invoice"
         log: Integer;
     begin
         numString := '';
+        if number <> 1 then
+            appendScale += 's';
+
+        if number = 0 then
+            exit(OnesText[20] + ' ' + appendScale);
+
         if number < 100 then
             if number < 20 then
                 numString := OnesText[number]
-            ELSE BEGIN
+            else begin
                 numString := TensText[number DIV 10];
                 if (number MOD 10) > 0 then
                     numString := numString + ' ' + OnesText[number MOD 10];
-            END
-        ELSE BEGIN
+            end
+        else begin
             pow := 0;
             powStr := '';
-            if number < 1000 then begin // number is between 100 and 1000
+            if number < 1000 then begin
                 pow := 100;
                 powStr := ThousText[1];
-            END ELSE begin // find the scale of the number
+            end else begin
                 log := number DIV 1000;
                 pow := POWER(1000, log);
                 powStr := ThousText[log + 1];
-            END;
+            end;
 
             numString := NumberToWords(number DIV pow, powStr) + ' ' + NumberToWords(number MOD pow, '');
-        END;
+        end;
 
-        EXIT(numString + ' ' + appendScale);
+        exit(numString + ' ' + appendScale);
     end;
 
     local procedure InitTextVariables()
@@ -389,6 +408,7 @@ report 50100 "M3 Proforma Invoice"
         OnesText[17] := 'seventeen';
         OnesText[18] := 'eighteen';
         OnesText[19] := 'nineteen';
+        OnesText[20] := 'zero';
 
         TensText[1] := '';
         TensText[2] := 'twenty';
