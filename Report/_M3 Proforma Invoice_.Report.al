@@ -192,6 +192,7 @@ report 50100 "M3 Proforma Invoice"
             }
             trigger OnPreDataItem()
             begin
+                ProfInvHeader.SetRange("No.", ProformaNo);
                 ContainersDesc := GetListOfContainers();
                 TotalAmountText := GetTotalAmountText();
                 FooterText := StrSubstNo(FooterTextLbl,
@@ -218,11 +219,13 @@ report 50100 "M3 Proforma Invoice"
                     {
                         ApplicationArea = Suite;
                         Caption = 'Proforma No.';
+                        TableRelation = "M3 Proforma Invoice Header";
                     }
                     field(PurchaseInvoiceNo; PurchaseInvoiceNo)
                     {
                         ApplicationArea = Suite;
                         Caption = 'Purchase Invoice No.';
+                        TableRelation = "Purch. Inv. Header";
                     }
                 }
             }
