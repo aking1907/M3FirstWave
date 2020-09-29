@@ -81,8 +81,11 @@ pageextension 50103 "M3 Posted Purch. Invoices Ext." extends "Posted Purchase In
                 trigger OnAction()
                 var
                     PIReport: Report "M3 Proforma Invoice";
+                    ProfInvHeader: Record "M3 Proforma Invoice Header";
                 begin
-                    PIReport.InitData("No.", "Proforma Invoice No.");
+                    TestField("Proforma Invoice No.");
+                    ProfInvHeader.SetRange("No.", "Proforma Invoice No.");
+                    PIReport.SetTableView(ProfInvHeader);
                     PIReport.RunModal();
                 end;
             }

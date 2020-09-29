@@ -5,12 +5,14 @@ report 50100 "M3 Proforma Invoice"
     Caption = 'Proforma Invoice';
     PreviewMode = PrintLayout;
 
+
     dataset
     {
-        dataitem(CopyLoop; "Integer")
+        dataitem(ProfInvHeader; "M3 Proforma Invoice Header")
         {
-            DataItemTableView = SORTING(Number) WHERE(Number = CONST(1));
-
+            DataItemTableView = SORTING("No.");
+            RequestFilterFields = "No.";
+            RequestFilterHeading = 'Proforma Invoice';
             column(Logo; CompanyInfo.Picture)
             {
             }
@@ -62,137 +64,133 @@ report 50100 "M3 Proforma Invoice"
             column(FooterText; FooterText)
             {
             }
-            dataitem(ProfInvHeader; "M3 Proforma Invoice Header")
+            column(ProformaNo; "No.")
             {
-                DataItemTableView = SORTING("No.");
-                column(ProformaNo; "No.")
+            }
+            column(ProformaInvoiceNoLbl; ProformaInvoiceNoLbl)
+            {
+            }
+            column(ProformaDate; StrSubstNo('%1%2', DateLbl, format("Document Date", 0, '<Day,2>.<Month,2>.<Year4>')))
+            {
+            }
+            column(DateLbl; DateLbl)
+            {
+            }
+            column(ShipperLbl; ShipperLbl)
+            {
+            }
+            column(ShipperDesc; "Shipper Desc")
+            {
+            }
+            column(ProducerLbl; ProducerLbl)
+            {
+            }
+            column(ProducerDesc; "Producer Desc")
+            {
+            }
+            column(ConsigneeLbl; ConsigneeLbl)
+            {
+            }
+            column(ConsigneeDesc; "Consignee Desc")
+            {
+            }
+            column(LoadingPointLbl; LoadingPointLbl)
+            {
+            }
+            column(LoadingPointDesc; "Loading Point Desc")
+            {
+            }
+            column(ContainersLbl; ContainersLbl)
+            {
+            }
+            column(ContainersDesc; ContainersDesc)
+            {
+            }
+            column(DeliveryPointLbl; DeliveryPointLbl)
+            {
+            }
+            column(DeliveryPointDesc; "Delivery Point Desc")
+            {
+            }
+            column(DeliveryBasisLbl; DeliveryBasisLbl)
+            {
+            }
+            column(DeliveryBasisDesc; "Delivery Basis")
+            {
+            }
+            column(DocumentBasis; "Delivery Basis Desc")
+            {
+            }
+            dataitem(LotNoInfo; "Lot No. Information")
+            {
+                DataItemLink = "Proforma Invoice No." = field("No.");
+                DataItemLinkReference = ProfInvHeader;
+                column(ItemDesc; "Item Desc")
                 {
                 }
-                column(ProformaInvoiceNoLbl; ProformaInvoiceNoLbl)
+                column(ContainerLbl; ContainerLbl)
                 {
                 }
-                column(ProformaDate; StrSubstNo('%1%2', DateLbl, format("Document Date", 0, '<Day,2>.<Month,2>.<Year4>')))
+                column(ContainerName; "Container No.")
                 {
                 }
-                column(DateLbl; DateLbl)
+                column(PureContentLbl; PureContentLbl)
                 {
-                }
-                column(ShipperLbl; ShipperLbl)
-                {
-                }
-                column(ShipperDesc; "Shipper Desc")
-                {
-                }
-                column(ProducerLbl; ProducerLbl)
-                {
-                }
-                column(ProducerDesc; "Producer Desc")
-                {
-                }
-                column(ConsigneeLbl; ConsigneeLbl)
-                {
-                }
-                column(ConsigneeDesc; "Consignee Desc")
-                {
-                }
-                column(LoadingPointLbl; LoadingPointLbl)
-                {
-                }
-                column(LoadingPointDesc; "Loading Point Desc")
-                {
-                }
-                column(ContainersLbl; ContainersLbl)
-                {
-                }
-                column(ContainersDesc; ContainersDesc)
-                {
-                }
-                column(DeliveryPointLbl; DeliveryPointLbl)
-                {
-                }
-                column(DeliveryPointDesc; "Delivery Point Desc")
-                {
-                }
-                column(DeliveryBasisLbl; DeliveryBasisLbl)
-                {
-                }
-                column(DeliveryBasisDesc; "Delivery Basis")
-                {
-                }
-                column(DocumentBasis; "Delivery Basis Desc")
-                {
-                }
-                dataitem(LotNoInfo; "Lot No. Information")
-                {
-                    DataItemLink = "Proforma Invoice No." = field("No.");
-                    DataItemLinkReference = ProfInvHeader;
-                    column(ItemDesc; "Item Desc")
-                    {
-                    }
-                    column(ContainerLbl; ContainerLbl)
-                    {
-                    }
-                    column(ContainerName; "Container No.")
-                    {
-                    }
-                    column(PureContentLbl; PureContentLbl)
-                    {
 
-                    }
-                    column(PureContent; format("Pure Content, %") + '%')
-                    {
+                }
+                column(PureContent; format("Pure Content, %") + '%')
+                {
 
-                    }
-                    column(PriceLbl; PriceLbl)
-                    {
+                }
+                column(PriceLbl; PriceLbl)
+                {
 
-                    }
-                    column(PriceGross; StrSubstNo('%1 %2', "Price Gross", "Currency Code"))
-                    {
+                }
+                column(PriceGross; StrSubstNo('%1 %2', "Price Gross", "Currency Code"))
+                {
 
-                    }
-                    column(PriceContentLbl; PriceContentLbl)
-                    {
+                }
+                column(PriceContentLbl; PriceContentLbl)
+                {
 
-                    }
-                    column(PriceNet; StrSubstNo('%1 %2', "Price Net", "Currency Code"))
-                    {
+                }
+                column(PriceNet; StrSubstNo('%1 %2', "Price Net", "Currency Code"))
+                {
 
-                    }
-                    column(WeightNetLbl; WeightNetLbl)
-                    {
+                }
+                column(WeightNetLbl; WeightNetLbl)
+                {
 
-                    }
-                    column(NetWeight; "Weight Net")
-                    {
-                    }
-                    column(WeightGrossLbl; WeightGrossLbl)
-                    {
+                }
+                column(NetWeight; "Weight Net")
+                {
+                }
+                column(WeightGrossLbl; WeightGrossLbl)
+                {
 
-                    }
-                    column(GrossWeight; "Weight Gross")
-                    {
-                    }
-                    column(OriginLbl; OriginLbl)
-                    {
+                }
+                column(GrossWeight; "Weight Gross")
+                {
+                }
+                column(OriginLbl; OriginLbl)
+                {
 
-                    }
-                    column(Origin; Origin)
-                    {
+                }
+                column(Origin; Origin)
+                {
 
-                    }
-                    column(SubtotalLbl; SubtotalLbl)
-                    {
+                }
+                column(SubtotalLbl; SubtotalLbl)
+                {
 
-                    }
-                    column(Subtotal; StrSubstNo('%1 %2', Subtotal, "Currency Code"))
-                    {
-                    }
+                }
+                column(Subtotal; StrSubstNo('%1 %2', Subtotal, "Currency Code"))
+                {
                 }
             }
+
             trigger OnPreDataItem()
             begin
-                ProfInvHeader.SetRange("No.", ProformaNo);
                 ContainersDesc := GetListOfContainers();
                 TotalAmountText := GetTotalAmountText();
                 FooterText := StrSubstNo(FooterTextLbl,
@@ -204,45 +202,14 @@ report 50100 "M3 Proforma Invoice"
                                          FaxLbl + CompanyInfo."Fax No."
                                         );
             end;
+
         }
     }
-    requestpage
-    {
-        layout
-        {
-            area(content)
-            {
-                group(GroupName)
-                {
-                    Caption = 'Options';
-                    field(ProformaNo; ProformaNo)
-                    {
-                        ApplicationArea = Suite;
-                        Caption = 'Proforma No.';
-                        TableRelation = "M3 Proforma Invoice Header";
-                    }
-                    field(PurchaseInvoiceNo; PurchaseInvoiceNo)
-                    {
-                        ApplicationArea = Suite;
-                        Caption = 'Purchase Invoice No.';
-                        TableRelation = "Purch. Inv. Header";
-                    }
-                }
-            }
-        }
-        actions
-        {
-            area(processing)
-            {
-            }
-        }
-    }
+
     var
-        ProformaNo: Code[20];
-        PurchaseInvoiceNo: Code[20];
         ShortAddress: Text[100];
         ContainersDesc: Text[250];
-        TotalAmountText: Text[150];
+        TotalAmountText: Text[250];
         OnesText: Array[20] of Text[30];
         TensText: Array[10] of Text[30];
         ThousText: array[5] of Text[30];
@@ -289,17 +256,12 @@ report 50100 "M3 Proforma Invoice"
         ShortAddress := StrSubstNo('%1-%2 %3', CompanyInfo."Country/Region Code", CompanyInfo."Post Code", CompanyInfo.City);
     end;
 
-    trigger OnPreReport()
-    begin
-        CopyLoop.SetRange(Number, 1);
-    end;
-
     local procedure GetListOfContainers(): Text
     var
         ListOfContainers: Text;
         Lot: Record "Lot No. Information";
     begin
-        Lot.SetRange("Proforma Invoice No.", ProformaNo);
+        Lot.SetRange("Proforma Invoice No.", ProfInvHeader."No.");
         if Lot.FindSet() then
             repeat
                 ListOfContainers += Lot."Container No." + ',';
@@ -307,13 +269,7 @@ report 50100 "M3 Proforma Invoice"
         exit(DelChr(ListOfContainers, '<>', ','));
     end;
 
-    procedure InitData(PurchInvHeaderNo: Code[20]; ProformaInvNo: Code[20])
-    begin
-        ProformaNo := ProformaInvNo;
-        PurchaseInvoiceNo := PurchInvHeaderNo;
-    end;
-
-    local procedure GetTotalAmountText(): Text[150]
+    local procedure GetTotalAmountText(): Text[250]
     var
         Lot: Record "Lot No. Information";
         PIH: Record "Purch. Inv. Header";
@@ -324,7 +280,7 @@ report 50100 "M3 Proforma Invoice"
         Currency: Record Currency;
         TotalAmount: Decimal;
     begin
-        Lot.SetRange("Proforma Invoice No.", ProformaNo);
+        Lot.SetRange("Proforma Invoice No.", ProfInvHeader."No.");
         if Lot.IsEmpty then exit('');
         if Lot.FindSet() then
             repeat
