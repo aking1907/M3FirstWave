@@ -187,6 +187,12 @@ report 50100 "M3 Proforma Invoice"
                 column(Subtotal; StrSubstNo('%1 %2', Subtotal, "Currency Code"))
                 {
                 }
+
+                trigger OnAfterGetRecord()
+                begin
+                    ContainersDesc := GetListOfContainers();
+                    TotalAmountText := GetTotalAmountText();
+                end;
             }
 
             trigger OnPreDataItem()
@@ -273,11 +279,11 @@ report 50100 "M3 Proforma Invoice"
     var
         Lot: Record "Lot No. Information";
         PIH: Record "Purch. Inv. Header";
+        Currency: Record Currency;
         CurrencyCode: Code[5];
         CurrNoteName: Text[20];
         CurrCoinName: Text[20];
         TextArray: Array[2] of Text[80];
-        Currency: Record Currency;
         TotalAmount: Decimal;
     begin
         Lot.SetRange("Proforma Invoice No.", ProfInvHeader."No.");
@@ -301,7 +307,7 @@ report 50100 "M3 Proforma Invoice"
         exit(StrSubstNo(TotalAmountTextLbl, TotalAmount, CurrencyCode,
                 NumberToWords(round(TotalAmount, 1, '<'), CurrNoteName),
                 NumberToWords(round(TotalAmount * 100, 1, '<') mod 100, CurrCoinName),
-                CompanyName
+                CompanyInfo.Name
             ));
 
     end;
@@ -309,13 +315,11 @@ report 50100 "M3 Proforma Invoice"
     procedure NumberToWords(number: Integer; appendScale: Text): Text
     var
         numString: Text;
-        pow: Integer;
+        pow: BigInteger;
         powStr: Text;
         log: Integer;
     begin
         numString := '';
-        if number <> 1 then
-            appendScale += 's';
 
         if number = 0 then
             exit(OnesText[20] + ' ' + appendScale);
@@ -335,15 +339,17 @@ report 50100 "M3 Proforma Invoice"
                 pow := 100;
                 powStr := ThousText[1];
             end else begin
-                log := number DIV 1000;
-                pow := POWER(1000, log);
-                powStr := ThousText[log + 1];
+                log := StrLen(format(number)) DIV 3;//number DIV 1000;
+                if (StrLen(format(number)) MOD 3 > 0) then
+                    log += 1;
+                pow := POWER(1000, log - 1);
+                powStr := ThousText[log];
             end;
 
             numString := NumberToWords(number DIV pow, powStr) + ' ' + NumberToWords(number MOD pow, '');
         end;
 
-        exit(numString + ' ' + appendScale);
+        exit(DelChr(numString + ' ' + appendScale, '<>'));
     end;
 
     local procedure InitTextVariables()

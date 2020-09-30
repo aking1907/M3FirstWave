@@ -13,6 +13,7 @@ table 50105 "M3 Proforma Invoice Header"
         {
             Caption = 'No.';
             DataClassification = ToBeClassified;
+            NotBlank = true;
             Editable = false;
         }
         field(20; "Document Date"; Date)
@@ -201,6 +202,15 @@ table 50105 "M3 Proforma Invoice Header"
     begin
         Updated := CurrentDateTime;
         "Updated By" := UserId;
+    end;
+
+    trigger OnDelete()
+    var
+        PIH: Record "Purch. Inv. Header";
+    begin
+        PIH.SetRange("Proforma Invoice No.", "No.");
+        if not pih.IsEmpty then
+            PIH.ModifyAll("Proforma Invoice No.", '');
     end;
 
     var

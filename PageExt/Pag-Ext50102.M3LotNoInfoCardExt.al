@@ -28,6 +28,10 @@ pageextension 50102 "M3 Lot No. Info Card Ext." extends "Lot No. Information Car
                 {
                     ApplicationArea = All;
                 }
+                field("Currency Code"; "Currency Code")
+                {
+                    ApplicationArea = All;
+                }
                 field(Subtotal; Subtotal)
                 {
                     ApplicationArea = All;
@@ -53,7 +57,20 @@ pageextension 50102 "M3 Lot No. Info Card Ext." extends "Lot No. Information Car
                     ApplicationArea = All;
                 }
             }
+
         }
+
+        // addbefore(Control1900383207)
+        // {
+        //     part("Attached Documents"; "Document Attachment Factbox")
+        //     {
+        //         ApplicationArea = All;
+        //         Caption = 'Attachments';
+        //         SubPageLink = "Table ID" = CONST(6505),
+        //                       "No." = FIELD("Lot No."),
+        //                       "Document Type" = ;
+        //     }
+        // }
     }
 }
 
