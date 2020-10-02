@@ -26,7 +26,7 @@ tableextension 50102 "M3 Lot No. Info. Ext." extends "Lot No. Information"
         {
             Caption = 'Price Gross';
             DataClassification = ToBeClassified;
-
+            DecimalPlaces = 0 : 2;
             trigger OnValidate()
             begin
                 Validate("Pure Content, %");
@@ -36,7 +36,7 @@ tableextension 50102 "M3 Lot No. Info. Ext." extends "Lot No. Information"
         {
             Caption = 'Price Net';
             DataClassification = ToBeClassified;
-
+            DecimalPlaces = 0 : 2;
             trigger OnValidate()
             begin
                 Subtotal := Round("Price Net" * "Weight Net", 0.01, '=');
@@ -63,11 +63,13 @@ tableextension 50102 "M3 Lot No. Info. Ext." extends "Lot No. Information"
         {
             Caption = 'Currency Code';
             DataClassification = ToBeClassified;
+            TableRelation = Currency;
         }
         field(50007; "Unit of Measure Code"; Code[10])
         {
             Caption = 'Unit of Measure Code';
             DataClassification = ToBeClassified;
+            TableRelation = "Unit of Measure";
         }
         field(50008; Size; Text[30])
         {
@@ -78,6 +80,7 @@ tableextension 50102 "M3 Lot No. Info. Ext." extends "Lot No. Information"
         {
             Caption = 'Origin';
             DataClassification = ToBeClassified;
+            TableRelation = "Country/Region";
         }
         field(50010; Subtotal; Decimal)
         {
@@ -88,11 +91,45 @@ tableextension 50102 "M3 Lot No. Info. Ext." extends "Lot No. Information"
         {
             Caption = 'Proforma Invoice No.';
             DataClassification = ToBeClassified;
+            TableRelation = "M3 Proforma Invoice Header";
         }
         field(50012; "Item Desc"; Text[100])
         {
             Caption = 'Item Desc';
             DataClassification = ToBeClassified;
         }
+        field(50013; "Producer No."; Code[20])
+        {
+            Caption = 'Producer No.';
+            DataClassification = ToBeClassified;
+            TableRelation = Vendor;
+
+            trigger OnValidate()
+            var
+                Vendor: Record Vendor;
+            begin
+                "Producer Name" := '';
+                if Vendor.Get("Producer No.") then begin
+                    "Producer Name" := Vendor.Name;
+                    Origin := Vendor."Country/Region Code";
+                end;
+            end;
+        }
+        field(50014; "Producer Name"; Text[100])
+        {
+            Caption = 'Producer No.';
+            DataClassification = ToBeClassified;
+        }
     }
+
+    trigger OnAfterInsert();
+    var
+        Item: Record Item;
+    begin
+        if item.Get("Item No.") then begin
+            "Item Desc" := Item.Description;
+            "Unit of Measure Code" := Item."Base Unit of Measure";
+            Size := Item.Size;
+        end;
+    end;
 }

@@ -7,5 +7,12 @@ tableextension 50100 "M3 Purch. Inv. Header Ext." extends "Purch. Inv. Header"
             Caption = 'Proforma Invoice No.';
             TableRelation = "M3 Proforma Invoice Header";
         }
+        field(90000; "Delivery Point Code"; Code[20])
+        {
+            Caption = 'Delivery Point Code';
+            DataClassification = ToBeClassified;
+            TableRelation = Location;
+
+        }
     }
 }

@@ -2,13 +2,37 @@ pageextension 50102 "M3 Lot No. Info Card Ext." extends "Lot No. Information Car
 {
     layout
     {
+        modify("Certificate Number")
+        {
+            Editable = false;
+        }
+        addafter("Certificate Number")
+        {
+            field("Proforma Invoice No."; "Proforma Invoice No.")
+            {
+                Editable = false;
+                ApplicationArea = All;
+            }
+        }
         addafter(General)
         {
             group(Shipmrnt)
             {
                 Caption = 'Shipment Information';
 
+                field("Producer No."; "Producer No.")
+                {
+                    ApplicationArea = All;
+                }
+                field("Producer Name"; "Producer Name")
+                {
+                    ApplicationArea = All;
+                }
                 field("Container No."; "Container No.")
+                {
+                    ApplicationArea = All;
+                }
+                field("Item Desc"; "Item Desc")
                 {
                     ApplicationArea = All;
                 }
@@ -16,7 +40,7 @@ pageextension 50102 "M3 Lot No. Info Card Ext." extends "Lot No. Information Car
                 {
                     ApplicationArea = All;
                 }
-                field("Item Desc"; "Item Desc")
+                field("Currency Code"; "Currency Code")
                 {
                     ApplicationArea = All;
                 }
@@ -25,10 +49,6 @@ pageextension 50102 "M3 Lot No. Info Card Ext." extends "Lot No. Information Car
                     ApplicationArea = All;
                 }
                 field("Price Net"; "Price Net")
-                {
-                    ApplicationArea = All;
-                }
-                field("Currency Code"; "Currency Code")
                 {
                     ApplicationArea = All;
                 }

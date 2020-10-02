@@ -136,53 +136,48 @@ report 50100 "M3 Proforma Invoice"
                 }
                 column(PureContentLbl; PureContentLbl)
                 {
-
                 }
                 column(PureContent; format("Pure Content, %") + '%')
                 {
-
                 }
                 column(PriceLbl; PriceLbl)
                 {
-
                 }
                 column(PriceGross; StrSubstNo('%1 %2', "Price Gross", "Currency Code"))
                 {
-
                 }
                 column(PriceContentLbl; PriceContentLbl)
                 {
-
                 }
                 column(PriceNet; StrSubstNo('%1 %2', "Price Net", "Currency Code"))
                 {
-
                 }
                 column(WeightNetLbl; WeightNetLbl)
                 {
-
                 }
                 column(NetWeight; "Weight Net")
                 {
                 }
                 column(WeightGrossLbl; WeightGrossLbl)
                 {
-
                 }
                 column(GrossWeight; "Weight Gross")
                 {
                 }
+                column(SizeLbl; SizeLbl)
+                {
+                }
+                column(Size; Size)
+                {
+                }
                 column(OriginLbl; OriginLbl)
                 {
-
                 }
                 column(Origin; Origin)
                 {
-
                 }
                 column(SubtotalLbl; SubtotalLbl)
                 {
-
                 }
                 column(Subtotal; StrSubstNo('%1 %2', Subtotal, "Currency Code"))
                 {
