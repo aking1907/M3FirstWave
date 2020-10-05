@@ -17,43 +17,43 @@ page 50100 "M3 Purchase Proforma Invoices"
         {
             repeater(General)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Document Date"; "Document Date")
+                field("Document Date"; Rec."Document Date")
                 {
                     ApplicationArea = All;
                 }
-                field("Producer No."; "Producer No.")
+                field("Producer No."; Rec."Producer No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Producer Desc"; "Producer Desc")
+                field("Producer Desc"; Rec."Producer Desc")
                 {
                     ApplicationArea = All;
                 }
-                field("Consignee No."; "Consignee No.")
+                field("Consignee No."; Rec."Consignee No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Consignee Desc"; "Consignee Desc")
+                field("Consignee Desc"; Rec."Consignee Desc")
                 {
                     ApplicationArea = All;
                 }
-                field("Loading Point No."; "Loading Point No.")
+                field("Loading Point No."; Rec."Loading Point No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Loading Point Desc"; "Loading Point Desc")
+                field("Loading Point Desc"; Rec."Loading Point Desc")
                 {
                     ApplicationArea = All;
                 }
-                field("Delivery Point No."; "Delivery Point No.")
+                field("Delivery Point No."; Rec."Delivery Point No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Delivery Point Desc"; "Delivery Point Desc")
+                field("Delivery Point Desc"; Rec."Delivery Point Desc")
                 {
                     ApplicationArea = All;
                 }

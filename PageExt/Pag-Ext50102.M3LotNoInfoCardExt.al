@@ -8,7 +8,7 @@ pageextension 50102 "M3 Lot No. Info Card Ext." extends "Lot No. Information Car
         }
         addafter("Certificate Number")
         {
-            field("Proforma Invoice No."; "Proforma Invoice No.")
+            field("Proforma Invoice No."; Rec."Proforma Invoice No.")
             {
                 Editable = false;
                 ApplicationArea = All;
@@ -20,59 +20,59 @@ pageextension 50102 "M3 Lot No. Info Card Ext." extends "Lot No. Information Car
             {
                 Caption = 'Shipment Information';
 
-                field("Producer No."; "Producer No.")
+                field("Producer No."; Rec."Producer No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Producer Name"; "Producer Name")
+                field("Producer Name"; Rec."Producer Name")
                 {
                     ApplicationArea = All;
                 }
-                field("Container No."; "Container No.")
+                field("Container No."; Rec."Container No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Item Desc"; "Item Desc")
+                field("Item Desc"; Rec."Item Desc")
                 {
                     ApplicationArea = All;
                 }
-                field("Pure Content, %"; "Pure Content, %")
+                field("Pure Content, %"; Rec."Pure Content, %")
                 {
                     ApplicationArea = All;
                 }
-                field("Currency Code"; "Currency Code")
+                field("Currency Code"; Rec."Currency Code")
                 {
                     ApplicationArea = All;
                 }
-                field("Price Gross"; "Price Gross")
+                field("Price Gross"; Rec."Price Gross")
                 {
                     ApplicationArea = All;
                 }
-                field("Price Net"; "Price Net")
+                field("Price Net"; Rec."Price Net")
                 {
                     ApplicationArea = All;
                 }
-                field(Subtotal; Subtotal)
+                field(Subtotal; Rec.Subtotal)
                 {
                     ApplicationArea = All;
                 }
-                field("Weight Gross"; "Weight Gross")
+                field("Weight Gross"; Rec."Weight Gross")
                 {
                     ApplicationArea = All;
                 }
-                field("Weight Net"; "Weight Net")
+                field("Weight Net"; Rec."Weight Net")
                 {
                     ApplicationArea = All;
                 }
-                field("Unit of Measure Code"; "Unit of Measure Code")
+                field("Unit of Measure Code"; Rec."Unit of Measure Code")
                 {
                     ApplicationArea = All;
                 }
-                field(Size; Size)
+                field(Size; Rec.Size)
                 {
                     ApplicationArea = All;
                 }
-                field(Origin; Origin)
+                field(Origin; Rec.Origin)
                 {
                     ApplicationArea = All;
                 }

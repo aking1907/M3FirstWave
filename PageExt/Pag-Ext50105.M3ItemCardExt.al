@@ -4,11 +4,11 @@ pageextension 50105 "M3 Item Card Ext." extends "Item Card"
     {
         addafter("Base Unit of Measure")
         {
-            field("Abbreviation Code"; "Abbreviation Code")
+            field("Abbreviation Code"; Rec."Abbreviation Code")
             {
                 ApplicationArea = All;
             }
-            field(Size; Size)
+            field(Size; Rec.Size)
             {
                 ApplicationArea = All;
             }

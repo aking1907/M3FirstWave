@@ -4,7 +4,7 @@ pageextension 50103 "M3 Posted Purch. Invoices Ext." extends "Posted Purchase In
     {
         addafter("Location Code")
         {
-            field("Proforma Invoice No."; "Proforma Invoice No.")
+            field("Proforma Invoice No."; Rec."Proforma Invoice No.")
             {
                 ApplicationArea = All;
                 TableRelation = "M3 Proforma Invoice Header";
@@ -15,8 +15,8 @@ pageextension 50103 "M3 Posted Purch. Invoices Ext." extends "Posted Purchase In
                     PageProfInv: page "M3 Purch. Proforma Invoice";
                     PI: Record "M3 Proforma Invoice Header";
                 begin
-                    if not PI.Get("Proforma Invoice No.") then exit;
-                    PI.SetRange("No.", "Proforma Invoice No.");
+                    if not PI.Get(Rec."Proforma Invoice No.") then exit;
+                    PI.SetRange("No.", Rec."Proforma Invoice No.");
                     PageProfInv.SetTableView(PI);
                     PageProfInv.SetRecord(PI);
                     PageProfInv.Run();
@@ -83,8 +83,8 @@ pageextension 50103 "M3 Posted Purch. Invoices Ext." extends "Posted Purchase In
                     PIReport: Report "M3 Proforma Invoice";
                     ProfInvHeader: Record "M3 Proforma Invoice Header";
                 begin
-                    TestField("Proforma Invoice No.");
-                    ProfInvHeader.SetRange("No.", "Proforma Invoice No.");
+                    Rec.TestField("Proforma Invoice No.");
+                    ProfInvHeader.SetRange("No.", Rec."Proforma Invoice No.");
                     PIReport.SetTableView(ProfInvHeader);
                     PIReport.RunModal();
                 end;

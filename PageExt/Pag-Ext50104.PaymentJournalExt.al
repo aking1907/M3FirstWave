@@ -4,7 +4,7 @@ pageextension 50104 "Payment Journal Ext." extends "Payment Journal"
     {
         addafter("Account Type")
         {
-            field("Posting Group"; "Posting Group")
+            field("Posting Group"; Rec."Posting Group")
             {
                 ApplicationArea = All;
                 Editable = true;

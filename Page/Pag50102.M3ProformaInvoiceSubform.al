@@ -11,7 +11,7 @@ page 50102 "M3 Proforma Invoice Subform"
         {
             repeater(General)
             {
-                field("Certificate Number"; "Certificate Number")
+                field("Certificate Number"; Rec."Certificate Number")
                 {
                     Editable = false;
                     Caption = 'Purch. Invoice No.';
@@ -23,8 +23,8 @@ page 50102 "M3 Proforma Invoice Subform"
                         PIH: Record "Purch. Inv. Header";
                         PurchInvPage: Page "Posted Purchase Invoice";
                     begin
-                        if PIH.Get("Certificate Number") then begin
-                            PIH.SetRange("No.", "Certificate Number");
+                        if PIH.Get(Rec."Certificate Number") then begin
+                            PIH.SetRange("No.", Rec."Certificate Number");
                             PurchInvPage.SetRecord(PIH);
                             PurchInvPage.SetTableView(PIH);
                             PurchInvPage.Run;
@@ -32,11 +32,11 @@ page 50102 "M3 Proforma Invoice Subform"
 
                     end;
                 }
-                field("Container No."; "Container No.")
+                field("Container No."; Rec."Container No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Lot No."; "Lot No.")
+                field("Lot No."; Rec."Lot No.")
                 {
                     ApplicationArea = All;
                     Editable = false;
@@ -47,60 +47,60 @@ page 50102 "M3 Proforma Invoice Subform"
                         LOT: Record "Lot No. Information";
                         LotPage: Page "Lot No. Information Card";
                     begin
-                        if LOT.Get("Item No.", "Variant Code", "Lot No.") then begin
-                            LOT.SetRange("Lot No.", "Lot No.");
+                        if LOT.Get(Rec."Item No.", Rec."Variant Code", Rec."Lot No.") then begin
+                            LOT.SetRange("Lot No.", Rec."Lot No.");
                             LotPage.SetRecord(LOT);
                             LotPage.SetTableView(LOT);
                             LotPage.Run;
                         end;
                     end;
                 }
-                field("Item No."; "Item No.")
+                field("Item No."; Rec."Item No.")
                 {
                     ApplicationArea = All;
                     Editable = false;
                 }
-                field("Item Desc"; "Item Desc")
+                field("Item Desc"; Rec."Item Desc")
                 {
                     ApplicationArea = All;
                 }
-                field("Price Gross"; "Price Gross")
+                field("Price Gross"; Rec."Price Gross")
                 {
                     ApplicationArea = All;
                 }
-                field("Price Net"; "Price Net")
+                field("Price Net"; Rec."Price Net")
                 {
                     ApplicationArea = All;
                 }
-                field("Currency Code"; "Currency Code")
+                field("Currency Code"; Rec."Currency Code")
                 {
                     ApplicationArea = All;
                 }
-                field("Pure Content, %"; "Pure Content, %")
+                field("Pure Content, %"; Rec."Pure Content, %")
                 {
                     ApplicationArea = All;
                 }
-                field("Weight Gross"; "Weight Gross")
+                field("Weight Gross"; Rec."Weight Gross")
                 {
                     ApplicationArea = All;
                 }
-                field("Weight Net"; "Weight Net")
+                field("Weight Net"; Rec."Weight Net")
                 {
                     ApplicationArea = All;
                 }
-                field("Unit of Measure Code"; "Unit of Measure Code")
+                field("Unit of Measure Code"; Rec."Unit of Measure Code")
                 {
                     ApplicationArea = All;
                 }
-                field(Origin; Origin)
+                field(Origin; Rec.Origin)
                 {
                     ApplicationArea = All;
                 }
-                field(Size; Size)
+                field(Size; Rec.Size)
                 {
                     ApplicationArea = All;
                 }
-                field(Subtotal; Subtotal)
+                field(Subtotal; Rec.Subtotal)
                 {
                     ApplicationArea = All;
                 }

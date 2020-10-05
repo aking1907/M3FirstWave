@@ -4,7 +4,7 @@ pageextension 50106 "M3 Location Card Ext." extends "Location Card"
     {
         addafter(Name)
         {
-            field("Proforma Contract Text"; "Proforma Contract Text")
+            field("Proforma Contract Text"; Rec."Proforma Contract Text")
             {
                 MultiLine = true;
                 ApplicationArea = all;

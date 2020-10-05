@@ -12,63 +12,63 @@ page 50101 "M3 Purch. Proforma Invoice"
         {
             group(General)
             {
-                field("No."; "No.")
+                field("No."; Rec."No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Document Date"; "Document Date")
+                field("Document Date"; Rec."Document Date")
                 {
                     ApplicationArea = All;
                 }
-                field("Producer No."; "Producer No.")
+                field("Producer No."; Rec."Producer No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Producer Desc"; "Producer Desc")
-                {
-                    ApplicationArea = All;
-                    MultiLine = true;
-                }
-                field("Consignee No."; "Consignee No.")
-                {
-                    ApplicationArea = All;
-                }
-                field("Consignee Desc"; "Consignee Desc")
+                field("Producer Desc"; Rec."Producer Desc")
                 {
                     ApplicationArea = All;
                     MultiLine = true;
                 }
-                field("Shipper No."; "Shipper No.")
+                field("Consignee No."; Rec."Consignee No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Shipper Desc"; "Shipper Desc")
-                {
-                    ApplicationArea = All;
-                    MultiLine = true;
-                }
-                field("Loading Point No."; "Loading Point No.")
-                {
-                    ApplicationArea = All;
-                }
-                field("Loading Point Desc"; "Loading Point Desc")
-                {
-                    ApplicationArea = All;
-                }
-                field("Delivery Point No."; "Delivery Point No.")
-                {
-                    ApplicationArea = All;
-                }
-                field("Delivery Point Desc"; "Delivery Point Desc")
+                field("Consignee Desc"; Rec."Consignee Desc")
                 {
                     ApplicationArea = All;
                     MultiLine = true;
                 }
-                field("Delivery Basis"; "Delivery Basis")
+                field("Shipper No."; Rec."Shipper No.")
                 {
                     ApplicationArea = All;
                 }
-                field("Delivery Basis Desc"; "Delivery Basis Desc")
+                field("Shipper Desc"; Rec."Shipper Desc")
+                {
+                    ApplicationArea = All;
+                    MultiLine = true;
+                }
+                field("Loading Point No."; Rec."Loading Point No.")
+                {
+                    ApplicationArea = All;
+                }
+                field("Loading Point Desc"; Rec."Loading Point Desc")
+                {
+                    ApplicationArea = All;
+                }
+                field("Delivery Point No."; Rec."Delivery Point No.")
+                {
+                    ApplicationArea = All;
+                }
+                field("Delivery Point Desc"; Rec."Delivery Point Desc")
+                {
+                    ApplicationArea = All;
+                    MultiLine = true;
+                }
+                field("Delivery Basis"; Rec."Delivery Basis")
+                {
+                    ApplicationArea = All;
+                }
+                field("Delivery Basis Desc"; Rec."Delivery Basis Desc")
                 {
                     ApplicationArea = All;
                     MultiLine = true;

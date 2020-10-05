@@ -4,11 +4,11 @@ pageextension 50107 "M3 Purch. Order Ext" extends "Purchase Order"
     {
         addafter(Status)
         {
-            field("Delivery Point Code"; "Delivery Point Code")
+            field("Delivery Point Code"; Rec."Delivery Point Code")
             {
                 ApplicationArea = all;
             }
-            field("Delivery Point Name"; "Delivery Point Name")
+            field("Delivery Point Name"; Rec."Delivery Point Name")
             {
                 ApplicationArea = all;
             }
