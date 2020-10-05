@@ -82,12 +82,6 @@ report 50100 "M3 Proforma Invoice"
             column(ShipperDesc; "Shipper Desc")
             {
             }
-            column(ProducerLbl; ProducerLbl)
-            {
-            }
-            column(ProducerDesc; "Producer Desc")
-            {
-            }
             column(ConsigneeLbl; ConsigneeLbl)
             {
             }
@@ -155,13 +149,13 @@ report 50100 "M3 Proforma Invoice"
                 column(WeightNetLbl; WeightNetLbl)
                 {
                 }
-                column(NetWeight; "Weight Net")
+                column(NetWeight; format("Weight Net", 2) + ' ' + "Unit of Measure Code")
                 {
                 }
                 column(WeightGrossLbl; WeightGrossLbl)
                 {
                 }
-                column(GrossWeight; "Weight Gross")
+                column(GrossWeight; format("Weight Gross", 2) + ' ' + "Unit of Measure Code")
                 {
                 }
                 column(SizeLbl; SizeLbl)
@@ -180,6 +174,12 @@ report 50100 "M3 Proforma Invoice"
                 {
                 }
                 column(Subtotal; StrSubstNo('%1 %2', Subtotal, "Currency Code"))
+                {
+                }
+                column(ProducerLbl; ProducerLbl)
+                {
+                }
+                column(ProducerDesc; "Producer Name")
                 {
                 }
 
@@ -317,7 +317,7 @@ report 50100 "M3 Proforma Invoice"
         numString := '';
 
         if number = 0 then
-            exit(OnesText[20] + ' ' + appendScale);
+            exit('');
 
         if number < 100 then
             if number < 20 then

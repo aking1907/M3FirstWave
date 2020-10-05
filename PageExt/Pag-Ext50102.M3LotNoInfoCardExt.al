@@ -36,6 +36,10 @@ pageextension 50102 "M3 Lot No. Info Card Ext." extends "Lot No. Information Car
                 {
                     ApplicationArea = All;
                 }
+                field("Item Abbreviation Code"; Rec."Item Abbreviation Code")
+                {
+                    ApplicationArea = All;
+                }
                 field("Pure Content, %"; Rec."Pure Content, %")
                 {
                     ApplicationArea = All;

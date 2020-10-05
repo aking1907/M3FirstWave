@@ -120,6 +120,11 @@ tableextension 50102 "M3 Lot No. Info. Ext." extends "Lot No. Information"
             Caption = 'Producer No.';
             DataClassification = ToBeClassified;
         }
+        field(50015; "Item Abbreviation Code"; Code[20])
+        {
+            Caption = 'Item Abbreviation Code';
+            DataClassification = ToBeClassified;
+        }
     }
 
     trigger OnAfterInsert();
@@ -128,8 +133,10 @@ tableextension 50102 "M3 Lot No. Info. Ext." extends "Lot No. Information"
     begin
         if item.Get("Item No.") then begin
             "Item Desc" := Item.Description;
+            "Item Abbreviation Code" := Item."Abbreviation Code";
             "Unit of Measure Code" := Item."Base Unit of Measure";
             Size := Item.Size;
+            Modify();
         end;
     end;
 }

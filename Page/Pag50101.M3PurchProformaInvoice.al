@@ -20,24 +20,6 @@ page 50101 "M3 Purch. Proforma Invoice"
                 {
                     ApplicationArea = All;
                 }
-                field("Producer No."; Rec."Producer No.")
-                {
-                    ApplicationArea = All;
-                }
-                field("Producer Desc"; Rec."Producer Desc")
-                {
-                    ApplicationArea = All;
-                    MultiLine = true;
-                }
-                field("Consignee No."; Rec."Consignee No.")
-                {
-                    ApplicationArea = All;
-                }
-                field("Consignee Desc"; Rec."Consignee Desc")
-                {
-                    ApplicationArea = All;
-                    MultiLine = true;
-                }
                 field("Shipper No."; Rec."Shipper No.")
                 {
                     ApplicationArea = All;
@@ -50,6 +32,7 @@ page 50101 "M3 Purch. Proforma Invoice"
                 field("Loading Point No."; Rec."Loading Point No.")
                 {
                     ApplicationArea = All;
+                    Visible = false;
                 }
                 field("Loading Point Desc"; Rec."Loading Point Desc")
                 {
@@ -58,6 +41,11 @@ page 50101 "M3 Purch. Proforma Invoice"
                 field("Delivery Point No."; Rec."Delivery Point No.")
                 {
                     ApplicationArea = All;
+                }
+                field("Consignee Desc"; Rec."Consignee Desc")
+                {
+                    ApplicationArea = All;
+                    MultiLine = true;
                 }
                 field("Delivery Point Desc"; Rec."Delivery Point Desc")
                 {

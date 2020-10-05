@@ -56,41 +56,19 @@ table 50105 "M3 Proforma Invoice Header"
             Caption = 'Shipper Desc';
             DataClassification = ToBeClassified;
         }
-        field(60; "Producer No."; Code[10])
-        {
-            Caption = 'Producer No.';
-            DataClassification = ToBeClassified;
-            TableRelation = Vendor;
-
-            trigger OnValidate()
-            var
-                Vendor: Record Vendor;
-            begin
-                "Producer Desc" := '';
-                if Vendor.Get("Producer No.") then
-                    "Producer Desc" := Vendor.Name;
-            end;
-        }
-        field(70; "Producer Desc"; Text[250])
-        {
-            Caption = 'Producer Desc';
-            DataClassification = ToBeClassified;
-        }
         field(80; "Consignee No."; Code[10])
         {
             Caption = 'Consignee No.';
             DataClassification = ToBeClassified;
-            TableRelation = Customer;
+            TableRelation = Location;
 
             trigger OnValidate()
             var
-                Cust: Record Customer;
+                Loc: Record Location;
             begin
                 "Consignee Desc" := '';
-                if not Cust.Get("Consignee No.") then exit;
-
-                "Consignee Desc" := Cust.Name;
-                "Delivery Basis Desc" := Cust."Delivery Basis Desc";
+                if Loc.Get("Consignee No.") then
+                    "Consignee Desc" := Loc.Name;
             end;
         }
         field(90; "Consignee Desc"; Text[250])
@@ -127,10 +105,23 @@ table 50105 "M3 Proforma Invoice Header"
             trigger OnValidate()
             var
                 Loc: Record Location;
+                PIH: Record "Purch. Inv. Header";
             begin
                 "Delivery Point Desc" := '';
-                if Loc.Get("Delivery Point No.") then
-                    "Delivery Point Desc" := Loc.Name;
+                validate("Consignee No.", '');
+                "Delivery Basis" := '';
+                "Delivery Basis Desc" := '';
+
+                PIH.SetRange("Proforma Invoice No.", "No.");
+                if PIH.FindFirst() then
+                    "Delivery Basis" := PIH."Shipment Method Code";
+
+                if not Loc.Get("Delivery Point No.") then exit;
+
+                Validate("Consignee No.", "Delivery Point No.");
+                "Delivery Basis" := DelChr("Delivery Basis" + ' ' + loc.City, '<>');
+                "Delivery Point Desc" := Loc.Name;
+                "Delivery Basis Desc" := Loc."Proforma Contract Text";
             end;
         }
         field(130; "Delivery Point Desc"; Text[150])
@@ -143,7 +134,7 @@ table 50105 "M3 Proforma Invoice Header"
             Caption = 'Delivery Basis';
             DataClassification = ToBeClassified;
         }
-        field(150; "Delivery Basis Desc"; Text[250])
+        field(150; "Delivery Basis Desc"; Text[2048])
         {
             Caption = 'Delivery Basis Desc';
             DataClassification = ToBeClassified;
@@ -185,7 +176,7 @@ table 50105 "M3 Proforma Invoice Header"
     }
     fieldgroups
     {
-        fieldgroup(DropDown; "No.", "Document Date", "Producer No.", "Consignee No.")
+        fieldgroup(DropDown; "No.", "Document Date", "Delivery Point No.")
         {
         }
     }
@@ -220,15 +211,27 @@ table 50105 "M3 Proforma Invoice Header"
 
     procedure CopyFromPurchInvoice(var PurchInvoice: Record "Purch. Inv. Header")
     var
-        Customer: Record Customer;
+        OrderAddress: Record "Order Address";
+        ArrayData: Array[10] of Text[150];
+        Country: Record "Country/Region";
     begin
         Validate("Shipper No.", PurchInvoice."Buy-from Vendor No.");
-        Validate("Producer No.", PurchInvoice."Buy-from Vendor No.");
-        Validate("Consignee No.", PurchInvoice."Sell-to Customer No.");
-        Validate("Delivery Basis", PurchInvoice."Shipment Method Code");
+        Validate("Delivery Point No.", PurchInvoice."Delivery Point Code");
+        //Validate("Delivery Basis", PurchInvoice."Shipment Method Code");
 
-        if Customer.Get(PurchInvoice."Sell-to Customer No.") then
-            "Delivery Basis Desc" := Customer."Delivery Basis Desc";
+        "Loading Point Desc" := "Shipper Desc";
+        if OrderAddress.Get(PurchInvoice."Buy-from Vendor No.", PurchInvoice."Order Address Code") then begin
+            ArrayData[1] := OrderAddress.Name;
+            ArrayData[2] := OrderAddress.Address;
+            ArrayData[3] := OrderAddress."Address 2";
+            ArrayData[4] := OrderAddress."Post Code" + ' ' + OrderAddress."City";
+            if Country.Get(OrderAddress."Country/Region Code") then begin
+                ArrayData[5] := Country.Name;
+            end;
+
+            "Loading Point Desc" := GetAddress(ArrayData);
+
+        end;
 
     end;
 
@@ -240,7 +243,7 @@ table 50105 "M3 Proforma Invoice Header"
         for i := 1 to 10 do begin
             if ArrayLines[i] <> '' then FullAddress += ', ' + ArrayLines[i];
         end;
-        exit(DelChr(FullAddress, '<>', ','));
+        exit(DelChr(DelChr(FullAddress, '<>', ','), '<>', ' '));
     end;
 
     procedure UpsertProformaInvoice(var PurchInvHeader: Record "Purch. Inv. Header")
@@ -248,37 +251,53 @@ table 50105 "M3 Proforma Invoice Header"
         ProfInv: Record "M3 Proforma Invoice Header";
         PIH: Record "Purch. Inv. Header";
         DocNo: Code[20];
+        PurchSetup: Record "Purchases & Payables Setup";
+        DocumentNo: Code[20];
     begin
         if not PurchInvHeader.FindSet() then exit;
 
         PIH.Copy(PurchInvHeader);
         PIH.SetFilter("Proforma Invoice No.", '<>%1', '');
         if PIH.FindFirst() then begin
+            DocumentNo := PIH."Proforma Invoice No.";
             if PurchInvHeader.FindSet() then
                 repeat
                     PurchInvHeader.TestField("Buy-from Vendor No.", PIH."Buy-from Vendor No.");
                     PurchInvHeader.TestField("Shipment Method Code", PIH."Shipment Method Code");
                     if PurchInvHeader."Proforma Invoice No." <> '' then
-                        PurchInvHeader.TestField("Proforma Invoice No.", PIH."Proforma Invoice No.");
+                        PurchInvHeader.TestField("Proforma Invoice No.", DocumentNo);
 
                 until PurchInvHeader.Next() = 0;
 
-            PurchInvHeader.ModifyAll("Proforma Invoice No.", PIH."Proforma Invoice No.");
-            UpdateLotNo(PurchInvHeader);
+            if PurchInvHeader.FindSet() then
+                repeat
+                    PIH.Reset();
+                    PIH.SetRange("No.", PurchInvHeader."No.");
+                    if UpdateLotNo(PIH) then begin
+                        PurchInvHeader."Proforma Invoice No." := DocumentNo;
+                        PurchInvHeader.Modify();
+                    end;
+                until PurchInvHeader.Next() = 0;
             exit;
         end;
 
-        DocNo := NoSerMgt.GetNextNo('PURCHPI', WorkDate(), true);
+        PurchSetup.Get();
+        PurchSetup.TestField("Proforma Invoice Nos.");
+        DocNo := NoSerMgt.GetNextNo(PurchSetup."Proforma Invoice Nos.", WorkDate(), true);
         ProfInv."No." := DocNo;
         ProfInv."Document Date" := WorkDate();
         ProfInv.Insert(true);
 
         if PurchInvHeader.FindSet() then
             repeat
-                PurchInvHeader."Proforma Invoice No." := ProfInv."No.";
-                PurchInvHeader.Modify();
-                UpdateLotNo(PurchInvHeader);
+                PIH.Reset();
+                PIH.SetRange("No.", PurchInvHeader."No.");
+                if UpdateLotNo(PIH) then begin
+                    PurchInvHeader."Proforma Invoice No." := ProfInv."No.";
+                    PurchInvHeader.Modify();
+                end;
             until PurchInvHeader.Next() = 0;
+
         PurchInvHeader.FindFirst();
         ProfInv.CopyFromPurchInvoice(PurchInvHeader);
         ProfInv.Modify(true);
@@ -289,6 +308,7 @@ table 50105 "M3 Proforma Invoice Header"
     var
         PI: Record "M3 Proforma Invoice Header";
         PIH: Record "Purch. Inv. Header";
+        PIHtmp: Record "Purch. Inv. Header" temporary;
         DocumentNo: Code[20];
     begin
         PIH.Copy(PurchInvHeader);
@@ -298,11 +318,19 @@ table 50105 "M3 Proforma Invoice Header"
 
         repeat
             PIH.TestField("Proforma Invoice No.", DocumentNo);
-            PIH."Proforma Invoice No." := '';
-            PIH.Modify();
-
-            UpdateLotNo(PIH);
+            PIHtmp.Copy(PIH);
+            PIHtmp.Insert();
         until PIH.Next() = 0;
+
+        if PIHtmp.FindSet() then
+            repeat
+                PIH.Reset();
+                PIH.SetRange("No.", PIHtmp."No.");
+                PIH.FindFirst();
+                PIH."Proforma Invoice No." := '';
+                PIH.Modify();
+                if UpdateLotNo(PIH) then;
+            until PIHtmp.Next() = 0;
 
         PIH.Reset();
         PIH.SetRange("Proforma Invoice No.", DocumentNo);
@@ -312,18 +340,20 @@ table 50105 "M3 Proforma Invoice Header"
 
     end;
 
-    local procedure UpdateLotNo(var PurchInvHeader: Record "Purch. Inv. Header")
+    local procedure UpdateLotNo(var PurchInvHeader: Record "Purch. Inv. Header"): Boolean
     var
         TmpILE: Record "Item Ledger Entry" temporary;
         LOT: Record "Lot No. Information";
         ItemTrackingDocMgt: Codeunit "Item Tracking Doc. Management";
         PurchInvLine: Record "Purch. Inv. Line";
+        IsResult: Boolean;
     begin
         if not TmpILE.IsTemporary then Error('');
-
+        IsResult := false;
         if PurchInvHeader.FindSet() then
             repeat
                 PurchInvLine.SetRange("Document No.", PurchInvHeader."No.");
+                PurchInvLine.SetRange(Type, PurchInvLine.Type::Item);
                 if PurchInvLine.FindSet() then
                     repeat
                         TmpILE.Reset();
@@ -357,11 +387,14 @@ table 50105 "M3 Proforma Invoice Header"
 
 
                                         LOT.Modify();
+                                        IsResult := true;
                                     end;
                             until TmpILE.Next() = 0;
                         end else
-                            Error(ErrAssignProfInvNo, PurchInvLine."Document No.", PurchInvLine."Line No.");
+                            Message(ErrAssignProfInvNo, PurchInvLine."Document No.", PurchInvLine."Line No.");
                     until PurchInvLine.Next() = 0;
             until PurchInvHeader.Next() = 0;
+
+        exit(IsResult);
     end;
 }

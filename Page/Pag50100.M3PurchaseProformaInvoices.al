@@ -25,31 +25,15 @@ page 50100 "M3 Purchase Proforma Invoices"
                 {
                     ApplicationArea = All;
                 }
-                field("Producer No."; Rec."Producer No.")
-                {
-                    ApplicationArea = All;
-                }
-                field("Producer Desc"; Rec."Producer Desc")
-                {
-                    ApplicationArea = All;
-                }
-                field("Consignee No."; Rec."Consignee No.")
-                {
-                    ApplicationArea = All;
-                }
-                field("Consignee Desc"; Rec."Consignee Desc")
-                {
-                    ApplicationArea = All;
-                }
-                field("Loading Point No."; Rec."Loading Point No.")
-                {
-                    ApplicationArea = All;
-                }
                 field("Loading Point Desc"; Rec."Loading Point Desc")
                 {
                     ApplicationArea = All;
                 }
                 field("Delivery Point No."; Rec."Delivery Point No.")
+                {
+                    ApplicationArea = All;
+                }
+                field("Consignee Desc"; Rec."Consignee Desc")
                 {
                     ApplicationArea = All;
                 }

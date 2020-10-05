@@ -14,5 +14,11 @@ tableextension 50100 "M3 Purch. Inv. Header Ext." extends "Purch. Inv. Header"
             TableRelation = Location;
 
         }
+        field(90001; "Delivery Point Name"; Text[80])
+        {
+            Caption = 'Delivery Point Name';
+            FieldClass = FlowField;
+            CalcFormula = lookup(Location.Name where(Code = field("Delivery Point Code")));
+        }
     }
 }
