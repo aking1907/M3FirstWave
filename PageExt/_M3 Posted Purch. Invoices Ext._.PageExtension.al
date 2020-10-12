@@ -74,7 +74,7 @@ pageextension 50103 "M3 Posted Purch. Invoices Ext." extends "Posted Purchase In
                 Caption = 'Print Proforma Invoice';
                 Image = Print;
                 Promoted = true;
-                PromotedCategory = Process;
+                PromotedCategory = Category7;
                 PromotedIsBig = true;
                 PromotedOnly = true;
 

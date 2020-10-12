@@ -11,7 +11,7 @@ page 50102 "M3 Proforma Invoice Subform"
         {
             repeater(General)
             {
-                field("Certificate Number"; Rec."Certificate Number")
+                field("External Document No."; Rec."External Document No.")
                 {
                     Editable = false;
                     Caption = 'Purch. Invoice No.';
@@ -23,8 +23,8 @@ page 50102 "M3 Proforma Invoice Subform"
                         PIH: Record "Purch. Inv. Header";
                         PurchInvPage: Page "Posted Purchase Invoice";
                     begin
-                        if PIH.Get(Rec."Certificate Number") then begin
-                            PIH.SetRange("No.", Rec."Certificate Number");
+                        if PIH.Get(Rec."External Document No.") then begin
+                            PIH.SetRange("No.", Rec."External Document No.");
                             PurchInvPage.SetRecord(PIH);
                             PurchInvPage.SetTableView(PIH);
                             PurchInvPage.Run;
@@ -108,4 +108,10 @@ page 50102 "M3 Proforma Invoice Subform"
         }
     }
 
+    trigger OnInit()
+    begin
+        Rec.FilterGroup(4);
+        Rec.SetFilter("Proforma Invoice No.", '<>%1', '');
+        Rec.FilterGroup(0);
+    end;
 }

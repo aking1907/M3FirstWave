@@ -250,7 +250,6 @@ table 50105 "M3 Proforma Invoice Header"
     var
         ProfInv: Record "M3 Proforma Invoice Header";
         PIH: Record "Purch. Inv. Header";
-        DocNo: Code[20];
         PurchSetup: Record "Purchases & Payables Setup";
         DocumentNo: Code[20];
     begin
@@ -273,7 +272,7 @@ table 50105 "M3 Proforma Invoice Header"
                 repeat
                     PIH.Reset();
                     PIH.SetRange("No.", PurchInvHeader."No.");
-                    if UpdateLotNo(PIH) then begin
+                    if UpdateLotNo(PIH, DocumentNo) then begin
                         PurchInvHeader."Proforma Invoice No." := DocumentNo;
                         PurchInvHeader.Modify();
                     end;
@@ -283,8 +282,8 @@ table 50105 "M3 Proforma Invoice Header"
 
         PurchSetup.Get();
         PurchSetup.TestField("Proforma Invoice Nos.");
-        DocNo := NoSerMgt.GetNextNo(PurchSetup."Proforma Invoice Nos.", WorkDate(), true);
-        ProfInv."No." := DocNo;
+        DocumentNo := NoSerMgt.GetNextNo(PurchSetup."Proforma Invoice Nos.", WorkDate(), true);
+        ProfInv."No." := DocumentNo;
         ProfInv."Document Date" := WorkDate();
         ProfInv.Insert(true);
 
@@ -292,8 +291,8 @@ table 50105 "M3 Proforma Invoice Header"
             repeat
                 PIH.Reset();
                 PIH.SetRange("No.", PurchInvHeader."No.");
-                if UpdateLotNo(PIH) then begin
-                    PurchInvHeader."Proforma Invoice No." := ProfInv."No.";
+                if UpdateLotNo(PIH, DocumentNo) then begin
+                    PurchInvHeader."Proforma Invoice No." := DocumentNo;
                     PurchInvHeader.Modify();
                 end;
             until PurchInvHeader.Next() = 0;
@@ -329,7 +328,7 @@ table 50105 "M3 Proforma Invoice Header"
                 PIH.FindFirst();
                 PIH."Proforma Invoice No." := '';
                 PIH.Modify();
-                if UpdateLotNo(PIH) then;
+                if UpdateLotNo(PIH, PIH."Proforma Invoice No.") then;
             until PIHtmp.Next() = 0;
 
         PIH.Reset();
@@ -340,7 +339,7 @@ table 50105 "M3 Proforma Invoice Header"
 
     end;
 
-    local procedure UpdateLotNo(var PurchInvHeader: Record "Purch. Inv. Header"): Boolean
+    local procedure UpdateLotNo(var PurchInvHeader: Record "Purch. Inv. Header"; DocumentNo: Code[20]): Boolean
     var
         TmpILE: Record "Item Ledger Entry" temporary;
         LOT: Record "Lot No. Information";
@@ -363,11 +362,11 @@ table 50105 "M3 Proforma Invoice Header"
                             repeat
                                 if TmpILE."Lot No." <> '' then
                                     if LOT.Get(TmpILE."Item No.", TmpILE."Variant Code", TmpILE."Lot No.") then begin
-                                        LOT."Certificate Number" := PurchInvHeader."No.";
-                                        LOT."Proforma Invoice No." := PurchInvHeader."Proforma Invoice No.";
+                                        LOT."External Document No." := PurchInvHeader."No.";
+                                        LOT."Proforma Invoice No." := DocumentNo;
 
-                                        if PurchInvHeader."Proforma Invoice No." = '' then begin
-                                            LOT."Certificate Number" := '';
+                                        if DocumentNo = '' then begin
+                                            LOT."External Document No." := '';
                                         end else begin
                                             if LOT."Item Desc" = '' then
                                                 LOT."Item Desc" := PurchInvLine.Description;

@@ -117,12 +117,17 @@ tableextension 50102 "M3 Lot No. Info. Ext." extends "Lot No. Information"
         }
         field(50014; "Producer Name"; Text[100])
         {
-            Caption = 'Producer No.';
+            Caption = 'Producer Name';
             DataClassification = ToBeClassified;
         }
         field(50015; "Item Abbreviation Code"; Code[20])
         {
             Caption = 'Item Abbreviation Code';
+            DataClassification = ToBeClassified;
+        }
+        field(50016; "External Document No."; Code[20])
+        {
+            Caption = 'External Document No.';
             DataClassification = ToBeClassified;
         }
     }

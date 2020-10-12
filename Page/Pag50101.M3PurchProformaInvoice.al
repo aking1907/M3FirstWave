@@ -3,9 +3,10 @@ page 50101 "M3 Purch. Proforma Invoice"
 
     Caption = 'Purch. Proforma Invoice';
     PageType = Card;
+    PromotedActionCategories = 'New,Process,Report,,Print/Send';
     SourceTable = "M3 Proforma Invoice Header";
     RefreshOnActivate = true;
-
+    InsertAllowed = false;
     layout
     {
         area(content)
@@ -71,4 +72,32 @@ page 50101 "M3 Purch. Proforma Invoice"
         }
     }
 
+    actions
+    {
+        area(processing)
+        {
+            action("&Print")
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = '&Print';
+                Image = Print;
+                Promoted = true;
+                PromotedCategory = Category4;
+                PromotedIsBig = true;
+                PromotedOnly = true;
+
+                trigger OnAction()
+                var
+                    PIReport: Report "M3 Proforma Invoice";
+                    ProfInvHeader: Record "M3 Proforma Invoice Header";
+                begin
+                    ProfInvHeader.SetRange("No.", Rec."No.");
+                    PIReport.SetTableView(ProfInvHeader);
+                    PIReport.RunModal();
+                end;
+            }
+        }
+    }
 }
+
+
