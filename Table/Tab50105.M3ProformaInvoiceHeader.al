@@ -208,6 +208,7 @@ table 50105 "M3 Proforma Invoice Header"
         LblChangeConfirmation: Label 'Do you want to change %1?';
         NoSerMgt: Codeunit NoSeriesManagement;
         ErrAssignProfInvNo: Label 'Lot No. was not found for Invoice No. = %1, Line No. = %2.  Proforma Invoice No. can not be assigned to the document.';
+        ErrItemNotFound: Label 'Invoice No. = %1 does not contain lines with the Type equal Item. Proforma Invoice No. can not be assigned to the document.';
 
     procedure CopyFromPurchInvoice(var PurchInvoice: Record "Purch. Inv. Header")
     var
@@ -353,7 +354,7 @@ table 50105 "M3 Proforma Invoice Header"
             repeat
                 PurchInvLine.SetRange("Document No.", PurchInvHeader."No.");
                 PurchInvLine.SetRange(Type, PurchInvLine.Type::Item);
-                if PurchInvLine.FindSet() then
+                if PurchInvLine.FindSet() then begin
                     repeat
                         TmpILE.Reset();
                         TmpILE.DeleteAll();
@@ -392,6 +393,8 @@ table 50105 "M3 Proforma Invoice Header"
                         end else
                             Message(ErrAssignProfInvNo, PurchInvLine."Document No.", PurchInvLine."Line No.");
                     until PurchInvLine.Next() = 0;
+                end else
+                    Message(ErrItemNotFound, PurchInvLine."Document No.");
             until PurchInvHeader.Next() = 0;
 
         exit(IsResult);

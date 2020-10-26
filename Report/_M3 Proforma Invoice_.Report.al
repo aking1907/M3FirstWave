@@ -131,31 +131,31 @@ report 50100 "M3 Proforma Invoice"
                 column(PureContentLbl; PureContentLbl)
                 {
                 }
-                column(PureContent; format("Pure Content, %") + '%')
+                column(PureContent; format("Pure Content, %", 0, '<Sign><Integer><Decimals,5>') + ' %')
                 {
                 }
                 column(PriceLbl; PriceLbl)
                 {
                 }
-                column(PriceGross; StrSubstNo('%1 %2', "Price Gross", "Currency Code"))
+                column(PriceGross; StrSubstNo('%1 %2', format("Price Gross", 0, '<Sign><Integer><Decimals,3>'), "Currency Code"))
                 {
                 }
                 column(PriceContentLbl; PriceContentLbl)
                 {
                 }
-                column(PriceNet; StrSubstNo('%1 %2', "Price Net", "Currency Code"))
+                column(PriceNet; StrSubstNo('%1 %2', format("Price Net", 0, '<Sign><Integer><Decimals,3>'), "Currency Code"))
                 {
                 }
                 column(WeightNetLbl; WeightNetLbl)
                 {
                 }
-                column(NetWeight; format("Weight Net", 2) + ' ' + "Unit of Measure Code")
+                column(NetWeight; format("Weight Net", 0, '<Sign><Integer><Decimals,4>') + ' ' + "Unit of Measure Code")
                 {
                 }
                 column(WeightGrossLbl; WeightGrossLbl)
                 {
                 }
-                column(GrossWeight; format("Weight Gross", 2) + ' ' + "Unit of Measure Code")
+                column(GrossWeight; format("Weight Gross", 0, '<Sign><Integer><Decimals,4>') + ' ' + "Unit of Measure Code")
                 {
                 }
                 column(SizeLbl; SizeLbl)
@@ -167,13 +167,13 @@ report 50100 "M3 Proforma Invoice"
                 column(OriginLbl; OriginLbl)
                 {
                 }
-                column(Origin; Origin)
+                column(Origin; GetCountryName(Origin))
                 {
                 }
                 column(SubtotalLbl; SubtotalLbl)
                 {
                 }
-                column(Subtotal; StrSubstNo('%1 %2', Subtotal, "Currency Code"))
+                column(Subtotal; StrSubstNo('%1 %2', format(Subtotal, 0, '<Sign><Integer><Decimals,3>'), "Currency Code"))
                 {
                 }
                 column(ProducerLbl; ProducerLbl)
@@ -257,6 +257,14 @@ report 50100 "M3 Proforma Invoice"
         ShortAddress := StrSubstNo('%1-%2 %3', CompanyInfo."Country/Region Code", CompanyInfo."Post Code", CompanyInfo.City);
     end;
 
+    local procedure GetCountryName(CountryISOCode: Code[10]): Text[40]
+    var
+        Country: Record "Country/Region";
+    begin
+        if Country.Get(CountryISOCode) then exit(Country.Name);
+        exit('');
+    end;
+
     local procedure GetListOfContainers(): Text
     var
         ListOfContainers: Text;
@@ -276,8 +284,10 @@ report 50100 "M3 Proforma Invoice"
         PIH: Record "Purch. Inv. Header";
         Currency: Record Currency;
         CurrencyCode: Code[5];
-        CurrNoteName: Text[20];
-        CurrCoinName: Text[20];
+        CurrNoteName: Text[50];
+        CurrCoinName: Text[50];
+        CurBigValueStr: Text[150];
+        CurSmallValueStr: Text[150];
         TextArray: Array[2] of Text[80];
         TotalAmount: Decimal;
     begin
@@ -299,11 +309,15 @@ report 50100 "M3 Proforma Invoice"
                 CurrNoteName := LowerCase(Currency.Description);
 
         InitTextVariables;
-        exit(StrSubstNo(TotalAmountTextLbl, TotalAmount, CurrencyCode,
-                NumberToWords(round(TotalAmount, 1, '<'), CurrNoteName),
-                NumberToWords(round(TotalAmount * 100, 1, '<') mod 100, CurrCoinName),
-                CompanyInfo.Name
-            ));
+        CurBigValueStr := NumberToWords(round(TotalAmount, 1, '<'), CurrNoteName);
+        if CurBigValueStr = '' then
+            CurBigValueStr := 'zero ' + CurrNoteName;
+
+        CurSmallValueStr := NumberToWords(round(TotalAmount * 100, 1, '<') mod 100, CurrCoinName);
+        if CurSmallValueStr = '' then
+            CurSmallValueStr := 'zero ' + CurrCoinName;
+
+        exit(StrSubstNo(TotalAmountTextLbl, TotalAmount, CurrencyCode, CurBigValueStr, CurSmallValueStr, CompanyInfo.Name));
 
     end;
 

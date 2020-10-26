@@ -108,14 +108,14 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="ShipperDesc">
+                        <Textbox Name="ProducerDesc">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!ShipperDesc.Value</Value>
+                                  <Value>=Fields!ProducerDesc.Value</Value>
                                   <Style />
                                 </TextRun>
                               </TextRuns>
@@ -124,7 +124,7 @@
                               </Style>
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>ShipperDesc</rd:DefaultName>
+                          <rd:DefaultName>ProducerDesc</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -135,6 +135,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -537,7 +538,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>

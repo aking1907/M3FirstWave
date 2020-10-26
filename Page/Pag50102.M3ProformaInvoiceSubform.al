@@ -4,6 +4,8 @@ page 50102 "M3 Proforma Invoice Subform"
     Caption = 'Proforma Invoice Subform';
     PageType = ListPart;
     SourceTable = "Lot No. Information";
+    InsertAllowed = false;
+    DeleteAllowed = false;
 
     layout
     {
@@ -60,6 +62,10 @@ page 50102 "M3 Proforma Invoice Subform"
                     ApplicationArea = All;
                     Editable = false;
                 }
+                field("Item Abbreviation Code"; "Item Abbreviation Code")
+                {
+                    ApplicationArea = All;
+                }
                 field("Item Desc"; Rec."Item Desc")
                 {
                     ApplicationArea = All;
@@ -67,16 +73,18 @@ page 50102 "M3 Proforma Invoice Subform"
                 field("Price Gross"; Rec."Price Gross")
                 {
                     ApplicationArea = All;
+                    Caption = 'Price Pure';
+                }
+                field("Pure Content, %"; Rec."Pure Content, %")
+                {
+                    ApplicationArea = All;
                 }
                 field("Price Net"; Rec."Price Net")
                 {
                     ApplicationArea = All;
+                    Caption = 'Price';
                 }
                 field("Currency Code"; Rec."Currency Code")
-                {
-                    ApplicationArea = All;
-                }
-                field("Pure Content, %"; Rec."Pure Content, %")
                 {
                     ApplicationArea = All;
                 }
