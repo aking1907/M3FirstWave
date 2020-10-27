@@ -83,17 +83,21 @@ pageextension 50102 "M3 Lot No. Info Card Ext." extends "Lot No. Information Car
 
         }
 
-        // addbefore(Control1900383207)
-        // {
-        //     part("Attached Documents"; "Document Attachment Factbox")
-        //     {
-        //         ApplicationArea = All;
-        //         Caption = 'Attachments';
-        //         SubPageLink = "Table ID" = CONST(6505),
-        //                       "No." = FIELD("Lot No."),
-        //                       "Document Type" = ;
-        //     }
-        // }
+
+        addafter(Control1905767507)
+        {
+            part("Attached Documents"; "M3 Doc. Attachment Factbox")
+            {
+                ApplicationArea = All;
+                Visible = true;
+                Caption = 'Attachments';
+            }
+        }
     }
+
+    trigger OnAfterGetRecord()
+    begin
+        CurrPage."Attached Documents".Page.SetRecordIDFilter(Rec.RecordId);
+    end;
 }
 
