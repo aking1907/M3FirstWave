@@ -207,8 +207,7 @@ table 50105 "M3 Proforma Invoice Header"
     var
         LblChangeConfirmation: Label 'Do you want to change %1?';
         NoSerMgt: Codeunit NoSeriesManagement;
-        ErrAssignProfInvNo: Label 'Lot No. was not found for Invoice No. = %1, Line No. = %2.  Proforma Invoice No. can not be assigned to the document.';
-        ErrItemNotFound: Label 'Invoice No. = %1 does not contain lines with the Type equal Item. Proforma Invoice No. can not be assigned to the document.';
+        ErrAssignProfInvNo: Label 'Lot No. was not found for Invoice No. = %1.  Proforma Invoice No. can not be assigned to the document.';
 
     procedure CopyFromPurchInvoice(var PurchInvoice: Record "Purch. Inv. Header")
     var
@@ -347,6 +346,7 @@ table 50105 "M3 Proforma Invoice Header"
         ItemTrackingDocMgt: Codeunit "Item Tracking Doc. Management";
         PurchInvLine: Record "Purch. Inv. Line";
         IsResult: Boolean;
+        IsPIAssigned: Boolean;
     begin
         if not TmpILE.IsTemporary then Error('');
         IsResult := false;
@@ -354,12 +354,14 @@ table 50105 "M3 Proforma Invoice Header"
             repeat
                 PurchInvLine.SetRange("Document No.", PurchInvHeader."No.");
                 PurchInvLine.SetRange(Type, PurchInvLine.Type::Item);
-                if PurchInvLine.FindSet() then begin
+                IsPIAssigned := false;
+
+                if PurchInvLine.FindSet() then
                     repeat
                         TmpILE.Reset();
                         TmpILE.DeleteAll();
                         ItemTrackingDocMgt.RetrieveEntriesFromPostedInvoice(TmpILE, PurchInvLine.RowID1());
-                        if TmpILE.FindSet() then begin
+                        if TmpILE.FindSet() then
                             repeat
                                 if TmpILE."Lot No." <> '' then
                                     if LOT.Get(TmpILE."Item No.", TmpILE."Variant Code", TmpILE."Lot No.") then begin
@@ -388,13 +390,14 @@ table 50105 "M3 Proforma Invoice Header"
 
                                         LOT.Modify();
                                         IsResult := true;
+                                        IsPIAssigned := true;
                                     end;
                             until TmpILE.Next() = 0;
-                        end else
-                            Message(ErrAssignProfInvNo, PurchInvLine."Document No.", PurchInvLine."Line No.");
                     until PurchInvLine.Next() = 0;
-                end else
-                    Message(ErrItemNotFound, PurchInvLine."Document No.");
+
+                if not IsPIAssigned then
+                    Message(ErrAssignProfInvNo, PurchInvHeader."No.");
+
             until PurchInvHeader.Next() = 0;
 
         exit(IsResult);

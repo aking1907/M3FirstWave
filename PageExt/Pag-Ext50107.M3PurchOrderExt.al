@@ -2,7 +2,7 @@ pageextension 50107 "M3 Purch. Order Ext" extends "Purchase Order"
 {
     layout
     {
-        addafter(Status)
+        addbefore(PayToOptions)
         {
             field("Delivery Point Code"; Rec."Delivery Point Code")
             {

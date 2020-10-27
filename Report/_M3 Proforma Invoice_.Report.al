@@ -143,7 +143,8 @@ report 50100 "M3 Proforma Invoice"
                 column(PriceContentLbl; PriceContentLbl)
                 {
                 }
-                column(PriceNet; StrSubstNo('%1 %2', format("Price Net", 0, '<Sign><Integer><Decimals,3>'), "Currency Code"))
+                //column(PriceNet; StrSubstNo('%1 %2', format("Price Net", 0, '<Sign><Integer><Decimals,3>'), "Currency Code"))
+                column(PriceNet; StrSubstNo('%1%2/%3 pure = %1%4/%3 %5', "Currency Code", format("Price Net", 0, '<Sign><Integer><Decimals,3>'), "Unit of Measure Code", format("Price Gross", 0, '<Sign><Integer><Decimals,3>'), "Item Abbreviation Code"))
                 {
                 }
                 column(WeightNetLbl; WeightNetLbl)
@@ -317,7 +318,7 @@ report 50100 "M3 Proforma Invoice"
         if CurSmallValueStr = '' then
             CurSmallValueStr := 'zero ' + CurrCoinName;
 
-        exit(StrSubstNo(TotalAmountTextLbl, TotalAmount, CurrencyCode, CurBigValueStr, CurSmallValueStr, CompanyInfo.Name));
+        exit(StrSubstNo(TotalAmountTextLbl, format(TotalAmount, 0, '<Sign><Integer><Decimals,3>'), CurrencyCode, CurBigValueStr, CurSmallValueStr, CompanyInfo.Name));
 
     end;
 
