@@ -40,5 +40,6 @@ page 50105 "M3 Incom. Doc. Attach. Factbox"
         Rec.FilterGroup := 4;
         Rec.SetRange("Record ID", RecID);
         Rec.FilterGroup := currentFilterGroup;
+        CurrPage.Update(false);
     end;
 }

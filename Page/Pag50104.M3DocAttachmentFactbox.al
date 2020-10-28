@@ -4,7 +4,7 @@ page 50104 "M3 Doc. Attachment Factbox"
     PageType = CardPart;
     SourceTable = "Document Attachment";
     RefreshOnActivate = true;
-    
+
     layout
     {
         area(content)
@@ -61,5 +61,6 @@ page 50104 "M3 Doc. Attachment Factbox"
         Rec.FilterGroup := 4;
         Rec.SetRange("Record ID", RecID);
         Rec.FilterGroup := currentFilterGroup;
+        CurrPage.Update(false);
     end;
 }
