@@ -89,8 +89,12 @@ pageextension 50102 "M3 Lot No. Info Card Ext." extends "Lot No. Information Car
             part("Attached Documents"; "M3 Doc. Attachment Factbox")
             {
                 ApplicationArea = All;
-                Visible = true;
                 Caption = 'Attachments';
+            }
+            part(IncomingDocAttachFactBox; "M3 Incom. Doc. Attach. Factbox")
+            {
+                ApplicationArea = Basic, Suite;
+                ShowFilter = false;
             }
         }
     }
@@ -98,6 +102,7 @@ pageextension 50102 "M3 Lot No. Info Card Ext." extends "Lot No. Information Car
     trigger OnAfterGetRecord()
     begin
         CurrPage."Attached Documents".Page.SetRecordIDFilter(Rec.RecordId);
+        CurrPage.IncomingDocAttachFactBox.Page.SetRecordIDFilter(Rec.RecordId);
     end;
 }
 

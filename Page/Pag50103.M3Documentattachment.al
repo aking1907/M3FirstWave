@@ -39,10 +39,8 @@ page 50103 "M3 Document Attachment"
                     begin
                         if Rec."Document Reference ID".HasValue then
                             Rec.ExportBlobToFile()
-                        else begin
+                        else
                             Rec.ImportFileToBLOB(DocumentRecID);
-                            CurrPage.Update(false);
-                        end;
                     end;
                 }
                 field("File Extension"; Rec."File Extension")
@@ -75,11 +73,6 @@ page 50103 "M3 Document Attachment"
         }
     }
 
-    trigger OnInit()
-    begin
-        FlowFieldsEditable := true;
-    end;
-
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
         "File Name" := SelectFileTxt;
@@ -88,7 +81,6 @@ page 50103 "M3 Document Attachment"
     var
         DocumentRecID: RecordId;
         SelectFileTxt: Label 'Select File...';
-        FlowFieldsEditable: Boolean;
 
     procedure SetDocumentRecordId(RecID: RecordId)
     var
