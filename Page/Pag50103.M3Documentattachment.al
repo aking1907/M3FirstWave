@@ -2,8 +2,9 @@ page 50103 "M3 Document Attachment"
 {
     Caption = 'Document Attachment Details';
     PageType = List;
-    SourceTable = "M3 Document Attachment";
+    SourceTable = "Document Attachment";
     RefreshOnActivate = true;
+    
 
     layout
     {

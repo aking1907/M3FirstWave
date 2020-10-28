@@ -3,7 +3,7 @@ page 50105 "M3 Incom. Doc. Attach. Factbox"
 
     Caption = 'Incoming Doc. Attach. Factbox';
     PageType = ListPart;
-    SourceTable = "M3 Document Attachment";
+    SourceTable = "Document Attachment";
     Editable = false;
 
     layout

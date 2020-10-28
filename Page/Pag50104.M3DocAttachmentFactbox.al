@@ -1,10 +1,10 @@
 page 50104 "M3 Doc. Attachment Factbox"
 {
-    Caption = 'Document Attachment Factbox';
+    Caption = 'Documents Attached';
     PageType = CardPart;
-    SourceTable = "M3 Document Attachment";
+    SourceTable = "Document Attachment";
     RefreshOnActivate = true;
-
+    
     layout
     {
         area(content)
@@ -25,6 +25,8 @@ page 50104 "M3 Doc. Attachment Factbox"
                     begin
                         PageAttDocs.SetDocumentRecordId(DocumentRecordId);
                         PageAttDocs.RunModal();
+
+                        CurrPage.Update(false);
                     end;
                 }
             }
