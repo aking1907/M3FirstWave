@@ -2,7 +2,7 @@
     <PermissionSet RoleID="M3RoleId" RoleName="M3 Role">
         <Permission>
             <ObjectType>0</ObjectType>
-            <ObjectID>50100</ObjectID> <!-- SomeTable -->
+            <ObjectID>50105</ObjectID> <!-- SomeTable -->
             <ReadPermission>1</ReadPermission>
             <InsertPermission>1</InsertPermission>
             <ModifyPermission>1</ModifyPermission>
