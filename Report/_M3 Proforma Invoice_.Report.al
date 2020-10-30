@@ -137,14 +137,8 @@ report 50100 "M3 Proforma Invoice"
                 column(PriceLbl; PriceLbl)
                 {
                 }
-                column(PriceGross; StrSubstNo('%1 %2', format("Price Gross", 0, '<Sign><Integer><Decimals,3>'), "Currency Code"))
-                {
-                }
-                column(PriceContentLbl; PriceContentLbl)
-                {
-                }
                 //column(PriceNet; StrSubstNo('%1 %2', format("Price Net", 0, '<Sign><Integer><Decimals,3>'), "Currency Code"))
-                column(PriceNet; StrSubstNo('%1%2/%3 pure = %1%4/%3 %5', "Currency Code", format("Price Net", 0, '<Sign><Integer><Decimals,3>'), "Unit of Measure Code", format("Price Gross", 0, '<Sign><Integer><Decimals,3>'), "Item Abbreviation Code"))
+                column(Price; StrSubstNo('%1%2/%3 pure = %1%4/%3 %5', "Currency Code", format("Price Gross", 0, '<Sign><Integer><Decimals,3>'), "Unit of Measure Code", format("Price Net", 0, '<Sign><Integer><Decimals,3>'), "Item Abbreviation Code"))
                 {
                 }
                 column(WeightNetLbl; WeightNetLbl)
@@ -239,7 +233,6 @@ report 50100 "M3 Proforma Invoice"
         ContainerLbl: label 'Container:';
         PureContentLbl: Label 'Pure content:';
         PriceLbl: Label 'Price:';
-        PriceContentLbl: Label 'Content price:';
         WeightNetLbl: Label 'Weight net:';
         WeightGrossLbl: Label 'Weight gross:';
         SizeLbl: Label 'Size';
