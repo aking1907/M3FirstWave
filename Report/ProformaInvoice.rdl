@@ -11,175 +11,6 @@
       <rd:DataSourceID>0e88d126-6e15-4b4b-ac7d-111c6bd98eec</rd:DataSourceID>
     </DataSource>
   </DataSources>
-  <DataSets>
-    <DataSet Name="DataSet_Result">
-      <Query>
-        <DataSourceName>DataSource</DataSourceName>
-        <CommandText />
-      </Query>
-      <Fields>
-        <Field Name="Logo">
-          <DataField>Logo</DataField>
-        </Field>
-        <Field Name="Address">
-          <DataField>Address</DataField>
-        </Field>
-        <Field Name="Address2">
-          <DataField>Address2</DataField>
-        </Field>
-        <Field Name="ShortAddress">
-          <DataField>ShortAddress</DataField>
-        </Field>
-        <Field Name="CountryName">
-          <DataField>CountryName</DataField>
-        </Field>
-        <Field Name="Phone">
-          <DataField>Phone</DataField>
-        </Field>
-        <Field Name="PhoneLbl">
-          <DataField>PhoneLbl</DataField>
-        </Field>
-        <Field Name="Fax">
-          <DataField>Fax</DataField>
-        </Field>
-        <Field Name="FaxLbl">
-          <DataField>FaxLbl</DataField>
-        </Field>
-        <Field Name="Email">
-          <DataField>Email</DataField>
-        </Field>
-        <Field Name="EmailLbl">
-          <DataField>EmailLbl</DataField>
-        </Field>
-        <Field Name="HomePage">
-          <DataField>HomePage</DataField>
-        </Field>
-        <Field Name="HttpLbl">
-          <DataField>HttpLbl</DataField>
-        </Field>
-        <Field Name="VATNo">
-          <DataField>VATNo</DataField>
-        </Field>
-        <Field Name="VATNoLbl">
-          <DataField>VATNoLbl</DataField>
-        </Field>
-        <Field Name="TotalAmountText">
-          <DataField>TotalAmountText</DataField>
-        </Field>
-        <Field Name="FooterText">
-          <DataField>FooterText</DataField>
-        </Field>
-        <Field Name="ProformaNo">
-          <DataField>ProformaNo</DataField>
-        </Field>
-        <Field Name="ProformaInvoiceNoLbl">
-          <DataField>ProformaInvoiceNoLbl</DataField>
-        </Field>
-        <Field Name="ProformaDate">
-          <DataField>ProformaDate</DataField>
-        </Field>
-        <Field Name="DateLbl">
-          <DataField>DateLbl</DataField>
-        </Field>
-        <Field Name="ShipperLbl">
-          <DataField>ShipperLbl</DataField>
-        </Field>
-        <Field Name="ShipperDesc">
-          <DataField>ShipperDesc</DataField>
-        </Field>
-        <Field Name="ConsigneeLbl">
-          <DataField>ConsigneeLbl</DataField>
-        </Field>
-        <Field Name="ConsigneeDesc">
-          <DataField>ConsigneeDesc</DataField>
-        </Field>
-        <Field Name="LoadingPointLbl">
-          <DataField>LoadingPointLbl</DataField>
-        </Field>
-        <Field Name="LoadingPointDesc">
-          <DataField>LoadingPointDesc</DataField>
-        </Field>
-        <Field Name="ContainersLbl">
-          <DataField>ContainersLbl</DataField>
-        </Field>
-        <Field Name="ContainersDesc">
-          <DataField>ContainersDesc</DataField>
-        </Field>
-        <Field Name="DeliveryPointLbl">
-          <DataField>DeliveryPointLbl</DataField>
-        </Field>
-        <Field Name="DeliveryPointDesc">
-          <DataField>DeliveryPointDesc</DataField>
-        </Field>
-        <Field Name="DeliveryBasisLbl">
-          <DataField>DeliveryBasisLbl</DataField>
-        </Field>
-        <Field Name="DeliveryBasisDesc">
-          <DataField>DeliveryBasisDesc</DataField>
-        </Field>
-        <Field Name="DocumentBasis">
-          <DataField>DocumentBasis</DataField>
-        </Field>
-        <Field Name="ItemDesc">
-          <DataField>ItemDesc</DataField>
-        </Field>
-        <Field Name="ContainerLbl">
-          <DataField>ContainerLbl</DataField>
-        </Field>
-        <Field Name="ContainerName">
-          <DataField>ContainerName</DataField>
-        </Field>
-        <Field Name="PureContentLbl">
-          <DataField>PureContentLbl</DataField>
-        </Field>
-        <Field Name="PureContent">
-          <DataField>PureContent</DataField>
-        </Field>
-        <Field Name="PriceLbl">
-          <DataField>PriceLbl</DataField>
-        </Field>
-        <Field Name="Price">
-          <DataField>Price</DataField>
-        </Field>
-        <Field Name="WeightNetLbl">
-          <DataField>WeightNetLbl</DataField>
-        </Field>
-        <Field Name="NetWeight">
-          <DataField>NetWeight</DataField>
-        </Field>
-        <Field Name="WeightGrossLbl">
-          <DataField>WeightGrossLbl</DataField>
-        </Field>
-        <Field Name="GrossWeight">
-          <DataField>GrossWeight</DataField>
-        </Field>
-        <Field Name="SizeLbl">
-          <DataField>SizeLbl</DataField>
-        </Field>
-        <Field Name="Size">
-          <DataField>Size</DataField>
-        </Field>
-        <Field Name="OriginLbl">
-          <DataField>OriginLbl</DataField>
-        </Field>
-        <Field Name="Origin">
-          <DataField>Origin</DataField>
-        </Field>
-        <Field Name="SubtotalLbl">
-          <DataField>SubtotalLbl</DataField>
-        </Field>
-        <Field Name="Subtotal">
-          <DataField>Subtotal</DataField>
-        </Field>
-        <Field Name="ProducerLbl">
-          <DataField>ProducerLbl</DataField>
-        </Field>
-        <Field Name="ProducerDesc">
-          <DataField>ProducerDesc</DataField>
-        </Field>
-      </Fields>
-    </DataSet>
-  </DataSets>
   <ReportSections>
     <ReportSection>
       <Body>
@@ -2214,12 +2045,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>2</NumberOfRows>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <Code>Public Function BlankZero(ByVal Value As Decimal)
     if Value = 0 then
         Return ""
@@ -2259,4 +2084,173 @@ End Function
   <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>0eeb6585-38ae-40f1-885b-8d50088d51b4</rd:ReportID>
+  <DataSets>
+    <DataSet Name="DataSet_Result">
+      <Fields>
+        <Field Name="Logo">
+          <DataField>Logo</DataField>
+        </Field>
+        <Field Name="Address">
+          <DataField>Address</DataField>
+        </Field>
+        <Field Name="Address2">
+          <DataField>Address2</DataField>
+        </Field>
+        <Field Name="ShortAddress">
+          <DataField>ShortAddress</DataField>
+        </Field>
+        <Field Name="CountryName">
+          <DataField>CountryName</DataField>
+        </Field>
+        <Field Name="Phone">
+          <DataField>Phone</DataField>
+        </Field>
+        <Field Name="PhoneLbl">
+          <DataField>PhoneLbl</DataField>
+        </Field>
+        <Field Name="Fax">
+          <DataField>Fax</DataField>
+        </Field>
+        <Field Name="FaxLbl">
+          <DataField>FaxLbl</DataField>
+        </Field>
+        <Field Name="Email">
+          <DataField>Email</DataField>
+        </Field>
+        <Field Name="EmailLbl">
+          <DataField>EmailLbl</DataField>
+        </Field>
+        <Field Name="HomePage">
+          <DataField>HomePage</DataField>
+        </Field>
+        <Field Name="HttpLbl">
+          <DataField>HttpLbl</DataField>
+        </Field>
+        <Field Name="VATNo">
+          <DataField>VATNo</DataField>
+        </Field>
+        <Field Name="VATNoLbl">
+          <DataField>VATNoLbl</DataField>
+        </Field>
+        <Field Name="TotalAmountText">
+          <DataField>TotalAmountText</DataField>
+        </Field>
+        <Field Name="FooterText">
+          <DataField>FooterText</DataField>
+        </Field>
+        <Field Name="ProformaNo">
+          <DataField>ProformaNo</DataField>
+        </Field>
+        <Field Name="ProformaInvoiceNoLbl">
+          <DataField>ProformaInvoiceNoLbl</DataField>
+        </Field>
+        <Field Name="ProformaDate">
+          <DataField>ProformaDate</DataField>
+        </Field>
+        <Field Name="DateLbl">
+          <DataField>DateLbl</DataField>
+        </Field>
+        <Field Name="ShipperLbl">
+          <DataField>ShipperLbl</DataField>
+        </Field>
+        <Field Name="ShipperDesc">
+          <DataField>ShipperDesc</DataField>
+        </Field>
+        <Field Name="ConsigneeLbl">
+          <DataField>ConsigneeLbl</DataField>
+        </Field>
+        <Field Name="ConsigneeDesc">
+          <DataField>ConsigneeDesc</DataField>
+        </Field>
+        <Field Name="LoadingPointLbl">
+          <DataField>LoadingPointLbl</DataField>
+        </Field>
+        <Field Name="LoadingPointDesc">
+          <DataField>LoadingPointDesc</DataField>
+        </Field>
+        <Field Name="ContainersLbl">
+          <DataField>ContainersLbl</DataField>
+        </Field>
+        <Field Name="ContainersDesc">
+          <DataField>ContainersDesc</DataField>
+        </Field>
+        <Field Name="DeliveryPointLbl">
+          <DataField>DeliveryPointLbl</DataField>
+        </Field>
+        <Field Name="DeliveryPointDesc">
+          <DataField>DeliveryPointDesc</DataField>
+        </Field>
+        <Field Name="DeliveryBasisLbl">
+          <DataField>DeliveryBasisLbl</DataField>
+        </Field>
+        <Field Name="DeliveryBasisDesc">
+          <DataField>DeliveryBasisDesc</DataField>
+        </Field>
+        <Field Name="DocumentBasis">
+          <DataField>DocumentBasis</DataField>
+        </Field>
+        <Field Name="ItemDesc">
+          <DataField>ItemDesc</DataField>
+        </Field>
+        <Field Name="ContainerLbl">
+          <DataField>ContainerLbl</DataField>
+        </Field>
+        <Field Name="ContainerName">
+          <DataField>ContainerName</DataField>
+        </Field>
+        <Field Name="PureContentLbl">
+          <DataField>PureContentLbl</DataField>
+        </Field>
+        <Field Name="PureContent">
+          <DataField>PureContent</DataField>
+        </Field>
+        <Field Name="PriceLbl">
+          <DataField>PriceLbl</DataField>
+        </Field>
+        <Field Name="Price">
+          <DataField>Price</DataField>
+        </Field>
+        <Field Name="WeightNetLbl">
+          <DataField>WeightNetLbl</DataField>
+        </Field>
+        <Field Name="NetWeight">
+          <DataField>NetWeight</DataField>
+        </Field>
+        <Field Name="WeightGrossLbl">
+          <DataField>WeightGrossLbl</DataField>
+        </Field>
+        <Field Name="GrossWeight">
+          <DataField>GrossWeight</DataField>
+        </Field>
+        <Field Name="SizeLbl">
+          <DataField>SizeLbl</DataField>
+        </Field>
+        <Field Name="Size">
+          <DataField>Size</DataField>
+        </Field>
+        <Field Name="OriginLbl">
+          <DataField>OriginLbl</DataField>
+        </Field>
+        <Field Name="Origin">
+          <DataField>Origin</DataField>
+        </Field>
+        <Field Name="SubtotalLbl">
+          <DataField>SubtotalLbl</DataField>
+        </Field>
+        <Field Name="Subtotal">
+          <DataField>Subtotal</DataField>
+        </Field>
+        <Field Name="ProducerLbl">
+          <DataField>ProducerLbl</DataField>
+        </Field>
+        <Field Name="ProducerDesc">
+          <DataField>ProducerDesc</DataField>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DataSource</DataSourceName>
+        <CommandText />
+      </Query>
+    </DataSet>
+  </DataSets>
 </Report>
