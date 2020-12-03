@@ -243,13 +243,11 @@ page 50106 "M3 VAT Entries"
             {
                 ApplicationArea = RecordLinks;
                 Visible = false;
-                Editable = true;
             }
             systempart(Control1905767507; Notes)
             {
                 ApplicationArea = Notes;
                 Visible = false;
-                Editable = true;
             }
         }
     }
