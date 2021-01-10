@@ -1,0 +1,11 @@
+{
+    "launchConfigName":  "Docker tenant",
+    "containerResultPath":  "",
+    "userName":  "",
+    "securePassword":  "",
+    "vmUserName":  "",
+    "vmSecurePassword":  "",
+    "remoteContainerName":  "",
+    "dockerHost":  "",
+    "newPSSessionOptions":  ""
+}
