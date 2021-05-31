@@ -41,11 +41,11 @@ page 50104 "M3 Doc. Attachment Factbox"
         currentFilterGroup: Integer;
     begin
         currentFilterGroup := Rec.FilterGroup;
-        FilterGroup := 4;
+        Rec.FilterGroup := 4;
 
         NumberOfRecords := 0;
         if Rec.GetFilters() <> '' then
-            NumberOfRecords := Count;
+            NumberOfRecords := Rec.Count;
         Rec.FilterGroup := currentFilterGroup;
     end;
 

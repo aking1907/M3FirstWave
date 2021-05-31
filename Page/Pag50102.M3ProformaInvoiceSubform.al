@@ -62,7 +62,7 @@ page 50102 "M3 Proforma Invoice Subform"
                     ApplicationArea = All;
                     Editable = false;
                 }
-                field("Item Abbreviation Code"; "Item Abbreviation Code")
+                field("Item Abbreviation Code"; Rec."Item Abbreviation Code")
                 {
                     ApplicationArea = All;
                 }

@@ -4,7 +4,7 @@ page 50103 "M3 Document Attachment"
     PageType = List;
     SourceTable = "Document Attachment";
     RefreshOnActivate = true;
-    
+
 
     layout
     {
@@ -76,7 +76,7 @@ page 50103 "M3 Document Attachment"
 
     trigger OnNewRecord(BelowxRec: Boolean)
     begin
-        "File Name" := SelectFileTxt;
+        Rec."File Name" := SelectFileTxt;
     end;
 
     var
