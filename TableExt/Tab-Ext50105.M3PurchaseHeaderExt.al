@@ -13,11 +13,11 @@ tableextension 50105 "M3 Purchase Header Ext." extends "Purchase Header"
                 CalcFields("Delivery Point Name");
             end;
         }
-        field(90001; "Delivery Point Name"; Text[80])
+        field(90001; "Delivery Point Name"; Text[100])
         {
             Caption = 'Delivery Point Name';
             FieldClass = FlowField;
-            CalcFormula = lookup (Location.Name where(Code = field("Delivery Point Code")));
+            CalcFormula = lookup(Location.Name where(Code = field("Delivery Point Code")));
         }
 
     }
