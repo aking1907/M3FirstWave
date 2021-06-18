@@ -2,6 +2,7 @@ page 50106 "M3 VAT Entries"
 {
     ApplicationArea = Basic, Suite;
     Caption = 'VAT Entries Admin';
+    QueryCategory = 'VAT Entries Admin';
     DeleteAllowed = false;
     InsertAllowed = true;
     PageType = List;
@@ -345,6 +346,28 @@ page 50106 "M3 VAT Entries"
                     ApplicationArea = All;
                     Editable = true;
                 }
+            }
+        }
+    }
+
+    actions
+    {
+        area(processing)
+        {
+            action(UpdAdditionalCurAmt)
+            {
+                ApplicationArea = Basic, Suite;
+                Caption = 'Update Add. Currency Amount';
+                Ellipsis = true;
+                Image = ReverseRegister;
+                Scope = Repeater;
+
+                trigger OnAction()
+                var
+                    UpdAddCurAmt: Report "M3 VAT Entries UpdAddCur Amt";
+                begin
+                    UpdAddCurAmt.Run();
+                end;
             }
         }
     }
