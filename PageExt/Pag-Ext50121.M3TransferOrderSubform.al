@@ -1,15 +1,7 @@
-pageextension 50115 "M3 Sales Order Subform Ext." extends "Sales Order Subform"
+pageextension 50121 "M3 Transfer Order Subform" extends "Transfer Order Subform"
 {
     layout
     {
-        addafter("VAT Prod. Posting Group")
-        {
-            field("Gen. Prod. Posting Group"; Rec."Gen. Prod. Posting Group")
-            {
-                ApplicationArea = All;
-                Editable = true;
-            }
-        }
         addafter(Quantity)
         {
             field("Lot No."; GetLotNo())
@@ -27,7 +19,7 @@ pageextension 50115 "M3 Sales Order Subform Ext." extends "Sales Order Subform"
         LotNo: Code[30];
         LotCount: Integer;
     begin
-        TS.SetRange("Source Type", Database::"Sales Line");
+        TS.SetRange("Source Type", Database::"Transfer Line");
         TS.SetRange("Source ID", Rec."Document No.");
         TS.SetRange("Source Ref. No.", Rec."Line No.");
         TS.SetFilter("Lot No.", '<>%1', '');
@@ -36,7 +28,7 @@ pageextension 50115 "M3 Sales Order Subform Ext." extends "Sales Order Subform"
             LotNo := TS."Lot No.";   
         
 
-        RE.SetRange("Source Type", Database::"Sales Line");
+        RE.SetRange("Source Type", Database::"Transfer Line");
         RE.SetRange("Source ID", Rec."Document No.");
         RE.SetRange("Source Ref. No.", Rec."Line No.");
         RE.SetFilter("Lot No.", '<>%1', '');
@@ -50,3 +42,4 @@ pageextension 50115 "M3 Sales Order Subform Ext." extends "Sales Order Subform"
         exit(LotNo);
     end;
 }
+
