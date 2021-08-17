@@ -24,29 +24,37 @@ pageextension 50115 "M3 Sales Order Subform Ext." extends "Sales Order Subform"
     var
         RE: Record "Reservation Entry";
         TS: Record "Tracking Specification";
+        LotDictionary: Dictionary of [Code[50], Integer];
         LotNo: Code[30];
-        LotCount: Integer;
     begin
         TS.SetRange("Source Type", Database::"Sales Line");
         TS.SetRange("Source ID", Rec."Document No.");
         TS.SetRange("Source Ref. No.", Rec."Line No.");
         TS.SetFilter("Lot No.", '<>%1', '');
-        LotCount += TS.Count();
-        if TS.FindFirst() then
-            LotNo := TS."Lot No.";   
+        if TS.FindSet() then repeat
+            if LotNo = '' then 
+                LotNo := TS."Lot No.";
+            if not LotDictionary. ContainsKey(TS."Lot No.") then
+                LotDictionary.Add(TS."Lot No.", 1);
+        until TS.Next() = 0;
         
 
         RE.SetRange("Source Type", Database::"Sales Line");
         RE.SetRange("Source ID", Rec."Document No.");
         RE.SetRange("Source Ref. No.", Rec."Line No.");
         RE.SetFilter("Lot No.", '<>%1', '');
-        LotCount += RE.Count();
-        if RE.FindFirst() then 
-            LotNo := RE."Lot No.";   
+        if RE.FindSet() then repeat
+            if LotNo = '' then 
+                LotNo := RE."Lot No.";
+            if not LotDictionary. ContainsKey(RE."Lot No.") then
+                LotDictionary.Add(RE."Lot No.", 1);
+        until RE.Next() = 0; 
 
-        if LotCount > 1 then
-            exit('...');
-
-        exit(LotNo);
+        if LotDictionary.Count > 1 then
+            exit('...')
+        else if LotDictionary. Count = 1 then
+            exit(LotNo)
+        else
+            exit('');
     end;
 }
