@@ -2,12 +2,12 @@ pageextension 50116 "M3 Purch. Invoice Subform Ext." extends "Purch. Invoice Sub
 {
     layout
     {
-        modify("Gen. Prod. Posting Group")
-        {
-            ApplicationArea = All;
-            Editable = true;
-            Visible = true;
-        }
-        moveafter("VAT Prod. Posting Group"; "Gen. Prod. Posting Group")
+        // modify("Gen. Prod. Posting Group")
+        // {
+        //     ApplicationArea = All;
+        //     Editable = true;
+        //     Visible = true;
+        // }
+        // moveafter("VAT Prod. Posting Group"; "Gen. Prod. Posting Group")
     }
 }
